@@ -77,12 +77,12 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.temp-title {
+.col-temp-title {
     font-size: 4em;
     font-weight: bold;
 }
 
-.todays-info h2 {
+.col-todays-info h2 {
     font-size: 2em;
     margin: 0;
 }
@@ -97,13 +97,13 @@ body {
 }
 
 /* Forecast Section */
-.week-forecast {
+.rowweek-forecast {
     display: flex;
     justify-content: space-around;
     text-align: center;
 }
 
-.forecast-day {
+.col {
     background: rgba(255, 255, 255, 0.8);
     padding: 20px;
     border-radius: 10px;
@@ -111,12 +111,12 @@ body {
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.forecast-day:hover {
+.col:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-.forecast-day img {
+.col img {
     width: 42px;
     height: 42px;
 }

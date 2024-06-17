@@ -1,15 +1,22 @@
 <body>
 
 <main>
+   <div class="Navbar">
+    <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
+    <ul>
+        <li class="menu-item"><a href="news.html">News</a></li>
+    </ul>
+   </div>
+
     <!-- search bar and city name -->
     <section class="container">
         <div class="row">
             <form class="col" id="search-form">
-                <input type="text" id="search-input" aria-describedby="searchCity" placeholder="Search city..."
+                <input type="text" id="search-input" placeholder="Search city..."
                     class="search-form" autocomplete="off" />
                 <button type="submit">Search</button>
             </form>
-            <h1 class="col d-flex justify-content-center align-items-center city-title" id="searched-city">
+            <h1 class="city-title" id="searched-city">
                 Nairobi
             </h1>
         </div>
@@ -19,17 +26,17 @@
         </span>
     </section>
 
-    <!-- temp and day info -->
+    <!-- temperatures and day info -->
     <section class="current-weather">
         <div class="container">
             <div class="row">
-                <h1 class="col temp-title" id="current-temperature">4°</h1>
+                <h1 class="col-temp-title" id="current-temperature">8°</h1>
                 <div class="col todays-info">
                     <p id="current-time">11:00</p>
                     <h2 id="current-day">Today</h2>
                     <p id="weather-type">Cloudy</p>
                 </div>
-                <div class="col d-flex align-items-center side-info">
+                <div class="col-d-flex align-items-center side-info">
                     <ul>
                         <li>Humidity: <span id="humidity"></span></li>
                         <li>Wind: <span id="wind"></span></li>
@@ -37,43 +44,55 @@
                 </div>
             </div>
         </div>
-         <hr /> <!-- horizontal rule -->
+        <hr /> <!-- horizontal rule -->
     </section>
 
-    <!--5 day forecast-->
+    <!--A 7 Day forecast-->
     <section class="container">
-        <div class="row week-forecast">
+        <div class="rowweek-forecast">
             <div class="col">
-                <h3>Fri</h3>
+                <h3>Mon</h3>
                 <br /><img src="https://img.icons8.com/color-glass/42/000000/rain.png" /><br />
                 <p class="weather">Rain</p>
                 <span>2°</span>
             </div>
             <div class="col">
-                <h3>Sat</h3>
+                <h3>Tue</h3>
                 <br /><img src="https://img.icons8.com/color-glass/42/000000/cloud.png" /><br />
                 <p class="weather">Cloudy</p>
                 <span>4°</span>
             </div>
             <div class="col">
-                <h3>Sun</h3>
-                <br /><img src="https://img.icons8.com/color-glass/42/000000/partly-cloudy-day.png" /><br />
-                <p class="weather">Partly cloudy</p>
-                <span>6°</span>
+                <h3>Wed</h3>
+                <br /><img src="https://img.icons8.com/?size=100&id=81155&format=png&color=000000" /><br />
+                <p class="weather">Cloud-lightning</p>
+                <span>1°</span>
             </div>
             <div class="col">
-                <h3>Mon</h3>
+                <h3>Thur</h3>
                 <br /><img src="https://img.icons8.com/color-glass/42/000000/sun.png" /><br />
                 <p class="weather">Sunny</p>
-                <span>8°</span>
+                <span>10°</span>
             </div>
             <div class="col">
-                <h3>Tues</h3>
+                <h3>Fri</h3>
                 <br /><img src="https://img.icons8.com/color-glass/42/000000/wind.png" /><br />
                 <p class="weather">Windy</p>
                 <span>5°</span>
             </div>
-        </div>
+            <div class="col">
+                <h3>Sat</h3>
+                <br /><img src="https://img.icons8.com/color-glass/42/000000/partly-cloudy-day.png" /><br />
+                <p class="weather">Partly cloudy</p>
+                <span>7°</span>
+            </div>
+            <div class="col">
+                <h3>Tue</h3>
+                <br /><img src="https://img.icons8.com/color-glass/42/000000/cloud.png" /><br />
+                <p class="weather">Cloudy</p>
+                <span>3°</span>
+            </div>
+</div>
     </section>
 
     <footer>
@@ -84,3 +103,5 @@
     </footer>
 </main>
 </body>
+
+<!-- images/icons are linked directly to icons8.com -->
