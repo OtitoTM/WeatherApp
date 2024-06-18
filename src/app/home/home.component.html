@@ -4,7 +4,7 @@
    <div class="Navbar">
     <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
     <ul>
-        <li class="menu-item"><a href="news.html">News</a></li>
+        <li><a [routerLink]="['/news']"routerLinkActive="active">News</a></li>
     </ul>
    </div>
 
@@ -35,8 +35,7 @@
                     <p id="current-time">11:00</p>
                     <h2 id="current-day">Today</h2>
                     <p id="weather-type">Cloudy</p>
-                </div>
-                <div class="col-d-flex align-items-center side-info">
+                
                     <ul>
                         <li>Humidity: <span id="humidity"></span></li>
                         <li>Wind: <span id="wind"></span></li>

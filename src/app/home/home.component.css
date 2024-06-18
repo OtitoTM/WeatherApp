@@ -87,12 +87,12 @@ body {
     margin: 0;
 }
 
-.side-info ul {
+.todays-info ul {
     list-style: none;
     padding: 0;
 }
 
-.side-info li {
+.todays-info li {
     margin: 10px 0;
 }
 
