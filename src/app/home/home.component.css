@@ -7,6 +7,35 @@ body {
     color: #333;
 }
 
+.Navbar {
+    background-color: #343a40;
+    padding: 10px 20px;
+}
+
+.Navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.Navbar ul li {
+    margin: 0;
+}
+
+.Navbar ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+.Navbar ul li a:hover,
+.Navbar ul li a.active {
+    background-color: #495057;
+}
 .container {
     max-width: 1200px;
     margin: 0 auto;
