@@ -1,112 +1,67 @@
-/* General styles */
-body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
-
-.container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-/* Breadcrumb */
-.breadcrumb {
-    margin: 20px 0;
-    font-size: 1.2em;
-}
-
-.breadcrumb span {
-    color: #555;
-}
-
-/* Footer styles */
+/* Footer Styles */
 .site-footer {
-    background-color: #333;
+    background-color: #343a40;
     color: #fff;
-    padding: 20px 0;
-}
-
-.site-footer .container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
+    padding: 30px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
 }
 
 .subscribe-form {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-.subscribe-form input[type="text"] {
-    flex: 1;
+.subscribe-form input[type="email"] {
     padding: 10px;
     border: none;
-    border-radius: 5px 0 0 5px;
+    border-radius: 4px 0 0 4px;
+    flex: 1;
+    min-width: 200px;
 }
 
 .subscribe-form input[type="submit"] {
-    padding: 10px;
+    padding: 10px 20px;
     border: none;
-    border-radius: 0 5px 5px 0;
-    background-color: #e8491d;
-    color: white;
+    background-color: #007bff;
+    color: #fff;
     cursor: pointer;
+    border-radius: 0 4px 4px 0;
     transition: background-color 0.3s ease;
 }
 
 .subscribe-form input[type="submit"]:hover {
-    background-color: #d43710;
+    background-color: #0056b3;
 }
 
-.social-links a {
-    color: white;
+.social-media-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.social-link {
+    color: #fff;
     margin: 0 10px;
-    text-decoration: none;
+    font-size: 1.5rem;
     transition: color 0.3s ease;
 }
 
-.social-links a:hover {
-    color: #e8491d;
+.social-link:hover {
+    color: #007bff;
 }
 
-.colophon {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 0.9em;
-}
-
-/* Responsive styles */
 @media (max-width: 768px) {
-    .container {
-        width: 95%;
-    }
-
-    .site-footer .container {
+    .row.align-items-center {
         flex-direction: column;
-        align-items: flex-start;
     }
 
-    .social-links {
+    .social-media-links {
         margin-top: 20px;
-    }
-
-    .subscribe-form input[type="text"],
-    .subscribe-form input[type="submit"] {
-        flex: 1 1 100%;
-        margin-top: 10px;
-        border-radius: 5px;
-    }
-
-    .subscribe-form input[type="text"] {
-        border-radius: 5px;
-    }
-
-    .subscribe-form input[type="submit"] {
-        border-radius: 5px;
     }
 }

@@ -1,8 +1,4 @@
 import { Component } from '@angular/core';
-import { PhotoComponent } from '../photo/photo.component';
-import { HomeComponent } from '../home/home.component';
-import { ContactComponent } from '../contact/contact.component';
-import { NewsComponent } from '../news/news.component';
 import { RouterLink } from '@angular/router';
 
 @Component({
