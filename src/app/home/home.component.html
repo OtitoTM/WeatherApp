@@ -1,99 +1,118 @@
 <body>
-
-<main>
+  <main>
     <!-- search bar and city name -->
     <section class="container">
-        <div class="row">
-            <form class="col" id="search-form">
-                <input type="text" id="search-input" placeholder="Search city..."
-                    class="search-form" autocomplete="off" />
-                <button type="submit">Search</button>
-            </form>
-            <h1 class="city-title" id="searched-city">
-                Nairobi
-            </h1>
-        </div>
-        <span class="measurements">
-            <a href="#" id="celcius-link">C°</a> |
-            <a href="#" id="fahrenheit-link">F°</a>
-        </span>
+      <div class="row">
+        <form class="col" id="search-form">
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Search city..."
+            class="search-form"
+            autocomplete="off"
+          />
+          <button type="submit">Search</button>
+        </form>
+        <h1 class="city-title" id="searched-city">Nairobi</h1>
+      </div>
+      <span class="measurements">
+        <a href="#" id="celcius-link">C°</a> |
+        <a href="#" id="fahrenheit-link">F°</a>
+      </span>
     </section>
 
     <!-- temperatures and day info -->
     <section class="current-weather">
-        <div class="container">
-            <div class="row">
-                <h1 class="col-temp-title" id="current-temperature">8°</h1>
-                <div class="col todays-info">
-                    <p id="current-time">11:00</p>
-                    <h2 id="current-day">Today</h2>
-                    <p id="weather-type">Cloudy</p>
-                
-                    <ul>
-                        <li>Humidity: <span id="humidity"></span></li>
-                        <li>Wind: <span id="wind"></span></li>
-                    </ul>
-                </div>
-            </div>
+      <div class="container">
+        <div class="row">
+          <h1 class="col-temp-title" id="current-temperature">8°</h1>
+          <div class="col todays-info">
+            <p id="current-time">11:00</p>
+            <h2 id="current-day">Today</h2>
+            <p id="weather-type">Cloudy</p>
+
+            <ul>
+              <li>Humidity: <span id="humidity"></span></li>
+              <li>Wind: <span id="wind"></span></li>
+            </ul>
+          </div>
         </div>
-        <hr /> <!-- horizontal rule -->
+      </div>
+      <hr />
+      <!-- horizontal rule -->
     </section>
 
     <!--A 7 Day Weather forecast-->
     <section class="container">
-        <div class="rowweek-forecast">
-            <div class="col">
-                <h3>Mon</h3>
-                <br /><img src="https://img.icons8.com/color-glass/42/000000/rain.png" /><br />
-                <p class="weather">Rain</p>
-                <span>2°</span>
-            </div>
-            <div class="col">
-                <h3>Tue</h3>
-                <br /><img src="https://img.icons8.com/color-glass/42/000000/cloud.png" /><br />
-                <p class="weather">Cloudy</p>
-                <span>4°</span>
-            </div>
-            <div class="col">
-                <h3>Wed</h3>
-                <br /><img src="https://img.icons8.com/?size=100&id=81155&format=png&color=000000" /><br />
-                <p class="weather">Cloud-lightning</p>
-                <span>1°</span>
-            </div>
-            <div class="col">
-                <h3>Thur</h3>
-                <br /><img src="https://img.icons8.com/color-glass/42/000000/sun.png" /><br />
-                <p class="weather">Sunny</p>
-                <span>10°</span>
-            </div>
-            <div class="col">
-                <h3>Fri</h3>
-                <br /><img src="https://img.icons8.com/color-glass/42/000000/wind.png" /><br />
-                <p class="weather">Windy</p>
-                <span>5°</span>
-            </div>
-            <div class="col">
-                <h3>Sat</h3>
-                <br /><img src="https://img.icons8.com/color-glass/42/000000/partly-cloudy-day.png" /><br />
-                <p class="weather">Partly cloudy</p>
-                <span>7°</span>
-            </div>
-            <div class="col">
-                <h3>Tue</h3>
-                <br /><img src="https://img.icons8.com/color-glass/42/000000/cloud.png" /><br />
-                <p class="weather">Cloudy</p>
-                <span>3°</span>
-            </div>
-</div>
+      <div class="rowweek-forecast">
+        <div class="col">
+          <h3>Mon</h3>
+          <br /><img
+            src="https://img.icons8.com/color-glass/42/000000/rain.png"
+          /><br />
+          <p class="weather">Rain</p>
+          <span>2°</span>
+        </div>
+        <div class="col">
+          <h3>Tue</h3>
+          <br /><img
+            src="https://img.icons8.com/color-glass/42/000000/cloud.png"
+          /><br />
+          <p class="weather">Cloudy</p>
+          <span>4°</span>
+        </div>
+        <div class="col">
+          <h3>Wed</h3>
+          <br /><img
+            src="https://img.icons8.com/?size=100&id=81155&format=png&color=000000"
+          /><br />
+          <p class="weather">Cloud-lightning</p>
+          <span>1°</span>
+        </div>
+        <div class="col">
+          <h3>Thur</h3>
+          <br /><img
+            src="https://img.icons8.com/color-glass/42/000000/sun.png"
+          /><br />
+          <p class="weather">Sunny</p>
+          <span>10°</span>
+        </div>
+        <div class="col">
+          <h3>Fri</h3>
+          <br /><img
+            src="https://img.icons8.com/color-glass/42/000000/wind.png"
+          /><br />
+          <p class="weather">Windy</p>
+          <span>5°</span>
+        </div>
+        <div class="col">
+          <h3>Sat</h3>
+          <br /><img
+            src="https://img.icons8.com/color-glass/42/000000/partly-cloudy-day.png"
+          /><br />
+          <p class="weather">Partly cloudy</p>
+          <span>7°</span>
+        </div>
+        <div class="col">
+          <h3>Tue</h3>
+          <br /><img
+            src="https://img.icons8.com/color-glass/42/000000/cloud.png"
+          /><br />
+          <p class="weather">Cloudy</p>
+          <span>3°</span>
+        </div>
+      </div>
     </section>
 
     <footer>
-        <p>
-            Designed and coded by
-            <a href="https://github.com/OtitoTM/WeatherApp.git" target="_blank">OtitoTM</a><span>✌🏼</span>
-        </p>
+      <p>
+        Designed and coded by
+        <a href="https://github.com/OtitoTM/WeatherApp.git" target="_blank"
+          >OtitoTM</a
+        ><span>✌🏼</span>
+      </p>
     </footer>
-</main>
+  </main>
 </body>
 
 <!-- images/icons are linked directly to icons8.com -->
