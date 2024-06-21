@@ -4,21 +4,22 @@
     <section class="container">
       <div class="row">
         <form class="col" id="search-form">
-          <input
-            type="text"
-            id="search-input"
-            placeholder="Search city..."
-            class="search-form"
-            autocomplete="off"
-          />
-          <button type="submit">Search</button>
+         <input type="text" name="cityName" placeholder="Enter a city name" [(ngModel)]="city">
+          <button type="button" (click)="getWeather()">Get Weather</button>
         </form>
-        <h1 class="city-title" id="searched-city">Nairobi</h1>
+        <div *ngIf="weatherData">
+            <h2>{{ weatherData.name }}</h2>
+            <p>Temperature: {{ weatherData.main.temp }}°C</p>
+            <p>Humidity: {{ weatherData.main.humidity }}%</p>
+            <p>Weather: {{weatherData.weather[0].description}}</p>
+
+        </div>
+        <!-- <h1 class="city-title" id="searched-city">Nairobi</h1> -->
       </div>
-      <span class="measurements">
+      <!-- <span class="measurements">
         <a href="#" id="celcius-link">C°</a> |
         <a href="#" id="fahrenheit-link">F°</a>
-      </span>
+      </span> -->
     </section>
 
     <!-- temperatures and day info -->
