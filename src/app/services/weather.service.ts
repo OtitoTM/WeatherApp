@@ -15,4 +15,10 @@ export class WeatherService {
     const url = `${this.apiUrl}?q=${city}&units=metric&appid=${this.apiKey}`;
     return this.httpClient.get(url);
   }
+
+  getForecast(lat: number,lon: number): Observable <any>{
+    const url = `${this.apiUrl}/onecall ? lat=$ {lat}&lon=${lon}&exclude=current,minutely,hourly,alerts&units=metric&appid=${this.apiKey}`;
+    return this.httpClient.get(url);
+
+  }
 }

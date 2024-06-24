@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   title = 'HomePage';
   city!: string;
   weatherData: any;
+  forecastData: any;
 
   constructor(private weatherService: WeatherService) {}
 
@@ -32,6 +33,13 @@ export class HomeComponent implements OnInit {
       this.weatherData.temp_max = data.main.temp_max;
       this.weatherData.temp_feels_like = data.main.feels_like;
       this.weatherData.isDay = data.weather[0].icon.includes('d');
+      this.getForecast(data.coord.lat,data.coord.lon);
+      console.log(data);
+    });
+  }
+  getForecast(lat: number, lon: number): void {
+    this.weatherService.getForecast(lat, lon).subscribe(data => {
+      this.forecastData = data.daily.slice(0, 7); // Get only the next 7 days
       console.log(data);
     });
   }
