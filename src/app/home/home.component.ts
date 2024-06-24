@@ -1,6 +1,6 @@
-import { WeatherService } from './../services/weather.service';
+import { WeatherService } from '../services/weather.service';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
@@ -9,23 +9,30 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
-  title='HomePage';
+export class HomeComponent implements OnInit {
+  title = 'HomePage';
   city!: string;
   weatherData: any;
 
-  constructor(private WeatherService:WeatherService){}
+  constructor(private weatherService: WeatherService) {}
 
-  ngOnInit(){
-    this.city = 'Nairobi'
+  ngOnInit(): void {
+    // Optionally initialize with a default city
+    // this.city = 'Nairobi';
+    // this.getWeather();
   }
 
-  getWeather(){
-    this.WeatherService.getWeather(this.city).subscribe(data => {
-      this.weatherData=data;
+  getWeather(): void {
+    this.weatherService.getWeather(this.city).subscribe(data => {
+      this.weatherData = data;
+      this.weatherData.temp_cecius = data.main.temp;
+      this.weatherData.temp_min = data.main.temp_min;
+      this.weatherData.temp_max = data.main.temp_max;
+      this.weatherData.temp_feels_like = data.main.feels_like;
+      this.weatherData.isDay = data.weather[0].icon.includes('d');
       console.log(data);
-  })
-}
+    });
+  }
 }

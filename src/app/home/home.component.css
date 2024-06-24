@@ -7,35 +7,15 @@ body {
     color: #333;
 }
 
-.Navbar {
-    background-color: #343a40;
-    padding: 10px 20px;
-}
-
-.Navbar ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: space-around;
-}
-
-.Navbar ul li {
-    margin: 0;
-}
-
-.Navbar ul li a {
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 20px;
+.weatherData {
     display: block;
-    transition: background-color 0.3s;
+    border-radius: 10px;
+    width: 500px;
+    height: 550px;
+    background-color: #0057b396;
+    color: #333;
 }
 
-.Navbar ul li a:hover,
-.Navbar ul li a.active {
-    background-color: #495057;
-}
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -97,32 +77,57 @@ body {
     color: #0056b3;
 }
 
-/* Current Weather Section */
-.current-weather {
-    background: rgba(255, 255, 255, 0.8);
-    padding: 20px;
+/* Temperatures and Day Info */
+.divWeatherMain {
+    display: block;
     border-radius: 10px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    height: 220px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgb(8, 7, 42));
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.col-temp-title {
-    font-size: 4em;
-    font-weight: bold;
+.weatherWidgetRow {
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
 }
 
-.col-todays-info h2 {
-    font-size: 2em;
-    margin: 0;
+.sun {
+    margin-top: 10px;
+    color: yellow;
+    filter: drop-shadow(1px 1px 10px yellow);
 }
 
-.todays-info ul {
-    list-style: none;
-    padding: 0;
+.moon {
+    margin-top: 10px;
+    color: white;
+    filter: drop-shadow(1px 1px 10px white);
 }
 
-.todays-info li {
-    margin: 10px 0;
+.cloudDiv {
+    margin-top: -20px;
+}
+
+.cloud {
+    color: rgb(104, 175, 197);
+    filter: drop-shadow(1px 1px 5px rgb(104, 175, 197));
+    animation-name: cloudMovement;
+    animation-iteration-count: infinite;
+    animation-duration: 10s;
+    animation-timing-function: ease-in-out;
+    animation-direction: alternate;
+}
+
+@keyframes cloudMovement {
+    from {
+        margin-left: -55px;
+    }
+
+    to {
+        margin-left: 65px;
+    }
 }
 
 /* Forecast Section */
