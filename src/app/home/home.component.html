@@ -1,58 +1,39 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-  integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-  crossorigin="anonymous" referrerpolicy="no-referrer" />
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
 <body>
   <main>
     <!-- search bar and city name -->
     <section class="container">
       <div class="row">
         <form class="col" id="search-form">
-        <input type="text" name="cityName" placeholder="Enter a city name" [(ngModel)]="city">
-        <button type="button" (click)="getWeather()">Get Weather</button>
+          <input type="text" name="cityName" placeholder="Enter a city name" [(ngModel)]="city">
+          <button type="button" (click)="getWeather()">Get Weather</button>
         </form>
-        <!-- <div *ngIf="weatherData">
-            <h2>{{ weatherData.name }}</h2>
-            <p>Temperature: {{ weatherData.main.temp }}°C</p>
-            <p>Humidity: {{ weatherData.main.humidity }}%</p>
-            <p>Weather: {{weatherData.weather[0].description}}</p>
-
-        </div> -->
       </div>
     </section>
 
-    <!-- temperatures and day info -->    
+    <!-- temperatures and day info -->
     <div class="divWeatherMain">
-      <div *ngIf="weatherData.isDay" class="weatherWidgetRow">
-        <i class="fa-solid fa-sun sun"></i>
-      </div>
-      <div *ngIf="weatherData.isDay" class="weatherWidgetRow">
-        <i class="fa-solid fa-moon moon"></i>
+      <div *ngIf="weatherData?.isDay !== undefined" class="weatherWidgetRow">
+        <i *ngIf="weatherData?.isDay" class="fa-solid fa-sun sun"></i>
+        <i *ngIf="!weatherData?.isDay" class="fa-solid fa-moon moon"></i>
       </div>
       <div class="weatherWidgetRow cloudDiv">
         <i class="fa-solid fa-cloud cloud"></i>
       </div>
-      <div class="weatherWidgetRow" style="font-size: 32px;margin-top: 5px;">{{weatherData?.temp_cecius}}°C</div>
-      <div class="weatherWidgetRow" style="font-size: 12px;">{{weatherData.temp_min}} / {{weatherData?.temp_max}}°</div>
-      <div class="weatherWidgetRow" style="font-size: 12px;">Feels Like: {{weatherData?.temp_feels_like}}°</div>
-      <div class="weatherWidgetRow" style="font-size: 25px;margin-top: 10px;">{{weatherData?.name}}</div>
-      <div class="weatherWidgetRow" style="font-size: 12px;">Humidity: {{weatherData?.main.humidity}}%</div>
+      <div class="weatherWidgetRow" style="font-size: 32px;margin-top: 5px;">{{ weatherData?.temp_cecius }}°C</div>
+      <div class="weatherWidgetRow" style="font-size: 12px;">{{ weatherData?.temp_min }} / {{ weatherData?.temp_max }}°
+      </div>
+      <div class="weatherWidgetRow" style="font-size: 12px;">Feels Like: {{ weatherData?.temp_feels_like }}°</div>
+      <div class="weatherWidgetRow" style="font-size: 25px;margin-top: 10px;">{{ weatherData?.name }}</div>
+      <div class="weatherWidgetRow" style="font-size: 12px;">Humidity: {{ weatherData?.main?.humidity }}%</div>
     </div>
-      <hr />
-      <!-- horizontal rule -->
-
-    <!--A 7 Day Weather forecast-->
-<section class="container">
-  <div class="row week-forecast" *ngIf="forecastData">
-    <div class="col" *ngFor="let day of forecastData">
-      <h3>{{ day | date:'EEE' }}</h3>
-      <br />
-      <img [src]="'https://openweathermap.org/img/wn/' + day.weather[0].icon + '@2x.png'" /><br />
-      <p class="weather">{{ day.weather[0].main }}</p>
-      <span>{{ day.temp.day }}°</span>
-    </div>
-  </div>
-</section> 
-
+    <hr />
+    <!-- horizontal rule -->
     <section class="container">
       <div class="rowweek-forecast">
         <div class="col">
@@ -99,16 +80,24 @@
         </div>
       </div>
     </section>
+    <!-- A 7 Day Weather forecast -->
+    <section class="container">
+      <div class="row week-forecast" *ngIf="forecastData">
+        <div class="col" *ngFor="let day of forecastData">
+          <h3>{{ day.dt | date:'EEE' }}</h3>
+          <br />
+          <img [src]="'https://openweathermap.org/img/wn/' + day.weather[0].icon + '@2x.png'" /><br />
+          <p class="weather">{{ day.weather[0].main }}</p>
+          <span>{{ day.temp.day }}°</span>
+        </div>
+      </div>
+    </section>
 
     <footer>
       <p>
         Designed and coded by
-        <a href="https://github.com/OtitoTM/WeatherApp.git" target="_blank"
-          >OtitoTM</a
-        ><span>✌🏼</span>
+        <a href="https://github.com/OtitoTM/WeatherApp.git" target="_blank">OtitoTM</a><span>✌🏼</span>
       </p>
     </footer>
   </main>
 </body>
-
-<!-- images/icons are linked directly to icons8.com -->
