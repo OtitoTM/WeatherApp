@@ -10,13 +10,13 @@
         <input type="text" name="cityName" placeholder="Enter a city name" [(ngModel)]="city">
         <button type="button" (click)="getWeather()">Get Weather</button>
         </form>
-        <div *ngIf="weatherData">
+        <!-- <div *ngIf="weatherData">
             <h2>{{ weatherData.name }}</h2>
             <p>Temperature: {{ weatherData.main.temp }}°C</p>
             <p>Humidity: {{ weatherData.main.humidity }}%</p>
             <p>Weather: {{weatherData.weather[0].description}}</p>
 
-        </div>
+        </div> -->
       </div>
     </section>
 
@@ -25,17 +25,17 @@
       <div *ngIf="weatherData.isDay" class="weatherWidgetRow">
         <i class="fa-solid fa-sun sun"></i>
       </div>
-      <div *ngIf="!weatherData.isDay" class="weatherWidgetRow">
+      <div *ngIf="weatherData.isDay" class="weatherWidgetRow">
         <i class="fa-solid fa-moon moon"></i>
       </div>
       <div class="weatherWidgetRow cloudDiv">
         <i class="fa-solid fa-cloud cloud"></i>
       </div>
-      <div class="weatherWidgetRow" style="font-size: 32px;margin-top: 5px;">{{weatherData.temp_cecius}}°C</div>
-      <div class="weatherWidgetRow" style="font-size: 12px;">{{weatherData.temp_min}} / {{weatherData.temp_max}}°</div>
-      <div class="weatherWidgetRow" style="font-size: 12px;">Feels Like: {{weatherData.temp_feels_like}}°</div>
-      <div class="weatherWidgetRow" style="font-size: 25px;margin-top: 10px;">{{weatherData.name}}</div>
-      <div class="weatherWidgetRow" style="font-size: 12px;">Humidity: {{weatherData.main.humidity}}%</div>
+      <div class="weatherWidgetRow" style="font-size: 32px;margin-top: 5px;">{{weatherData?.temp_cecius}}°C</div>
+      <div class="weatherWidgetRow" style="font-size: 12px;">{{weatherData.temp_min}} / {{weatherData?.temp_max}}°</div>
+      <div class="weatherWidgetRow" style="font-size: 12px;">Feels Like: {{weatherData?.temp_feels_like}}°</div>
+      <div class="weatherWidgetRow" style="font-size: 25px;margin-top: 10px;">{{weatherData?.name}}</div>
+      <div class="weatherWidgetRow" style="font-size: 12px;">Humidity: {{weatherData?.main.humidity}}%</div>
     </div>
       <hr />
       <!-- horizontal rule -->
@@ -51,7 +51,54 @@
       <span>{{ day.temp.day }}°</span>
     </div>
   </div>
-</section>
+</section> 
+
+    <section class="container">
+      <div class="rowweek-forecast">
+        <div class="col">
+          <h3>Mon</h3>
+          <br /><img src="https://img.icons8.com/color-glass/42/000000/rain.png" /><br />
+          <p class="weather">Rain</p>
+          <span>2°</span>
+        </div>
+        <div class="col">
+          <h3>Tue</h3>
+          <br /><img src="https://img.icons8.com/color-glass/42/000000/cloud.png" /><br />
+          <p class="weather">Cloudy</p>
+          <span>4°</span>
+        </div>
+        <div class="col">
+          <h3>Wed</h3>
+          <br /><img src="https://img.icons8.com/?size=100&id=81155&format=png&color=000000" /><br />
+          <p class="weather">Cloud-lightning</p>
+          <span>1°</span>
+        </div>
+        <div class="col">
+          <h3>Thur</h3>
+          <br /><img src="https://img.icons8.com/color-glass/42/000000/sun.png" /><br />
+          <p class="weather">Sunny</p>
+          <span>10°</span>
+        </div>
+        <div class="col">
+          <h3>Fri</h3>
+          <br /><img src="https://img.icons8.com/color-glass/42/000000/wind.png" /><br />
+          <p class="weather">Windy</p>
+          <span>5°</span>
+        </div>
+        <div class="col">
+          <h3>Sat</h3>
+          <br /><img src="https://img.icons8.com/color-glass/42/000000/partly-cloudy-day.png" /><br />
+          <p class="weather">Partly cloudy</p>
+          <span>7°</span>
+        </div>
+        <div class="col">
+          <h3>Sun</h3>
+          <br /><img src="https://img.icons8.com/color-glass/42/000000/cloud.png" /><br />
+          <p class="weather">Cloudy</p>
+          <span>3°</span>
+        </div>
+      </div>
+    </section>
 
     <footer>
       <p>
