@@ -6,9 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class WeatherService {
-  private apiKey = 'bdbde78124ddbc0fa5602f0d5d93d44f'; 
+  private apiKey = '1c27a7b13e5a4f069779839f5fc4ceae'; // Replace with your actual API key
   private weatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather';
-  private forecastApiUrl = 'https://api.openweathermap.org/data/2.5/onecall';
+  private forecastApiUrl = 'https://api.openweathermap.org/data/2.5/forecast'; // Using 5 day / 3 hour forecast
 
   constructor(private httpClient: HttpClient) {}
 
@@ -23,7 +23,7 @@ export class WeatherService {
   }
 
   getForecast(lat: number, lon: number): Observable<any> {
-    const url = `${this.forecastApiUrl}?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly,alerts&units=metric&appid=${this.apiKey}`;
+    const url = `${this.forecastApiUrl}?lat=${lat}&lon=${lon}&units=metric&appid=${this.apiKey}`;
     return this.httpClient.get(url);
   }
 }

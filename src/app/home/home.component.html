@@ -1,12 +1,9 @@
-<head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <body>
   <main>
-    <!-- search bar and city name -->
     <section class="container">
       <div class="row">
         <form class="col" id="search-form">
@@ -16,79 +13,42 @@
       </div>
     </section>
 
-    <!-- temperatures and day info -->
-    <div class="divWeatherMain">
-      <div *ngIf="weatherData?.isDay !== undefined" class="weatherWidgetRow">
-        <i *ngIf="weatherData?.isDay" class="fa-solid fa-sun sun"></i>
-        <i *ngIf="!weatherData?.isDay" class="fa-solid fa-moon moon"></i>
+    <div class="divWeatherMain" *ngIf="weatherData">
+      <div *ngIf="weatherData.isDay" class="weatherWidgetRow">
+        <i class="fa-solid fa-sun sun"></i>
+      </div>
+      <div *ngIf="!weatherData.isDay" class="weatherWidgetRow">
+        <i class="fa-solid fa-moon moon"></i>
       </div>
       <div class="weatherWidgetRow cloudDiv">
         <i class="fa-solid fa-cloud cloud"></i>
       </div>
-      <div class="weatherWidgetRow" style="font-size: 32px;margin-top: 5px;">{{ weatherData?.temp_cecius }}°C</div>
-      <div class="weatherWidgetRow" style="font-size: 12px;">{{ weatherData?.temp_min }} / {{ weatherData?.temp_max }}°
+      <div class="weatherWidgetRow" style="font-size: 32px; margin-top: 5px;">
+        {{ weatherData.temp_cecius }}°C
       </div>
-      <div class="weatherWidgetRow" style="font-size: 12px;">Feels Like: {{ weatherData?.temp_feels_like }}°</div>
-      <div class="weatherWidgetRow" style="font-size: 25px;margin-top: 10px;">{{ weatherData?.name }}</div>
-      <div class="weatherWidgetRow" style="font-size: 12px;">Humidity: {{ weatherData?.main?.humidity }}%</div>
+      <div class="weatherWidgetRow" style="font-size: 12px;">
+        {{ weatherData.temp_min }} / {{ weatherData.temp_max }}°
+      </div>
+      <div class="weatherWidgetRow" style="font-size: 12px;">
+        Feels Like: {{ weatherData.temp_feels_like }}°
+      </div>
+      <div class="weatherWidgetRow" style="font-size: 25px; margin-top: 10px;">
+        {{ weatherData.name }}
+      </div>
+      <div class="weatherWidgetRow" style="font-size: 12px;">
+        Humidity: {{ weatherData.main?.humidity }}%
+      </div>
     </div>
     <hr />
-    <!-- horizontal rule -->
+
     <section class="container">
-      <div class="rowweek-forecast">
-        <div class="col">
-          <h3>Mon</h3>
-          <br /><img src="https://img.icons8.com/color-glass/42/000000/rain.png" /><br />
-          <p class="weather">Rain</p>
-          <span>2°</span>
-        </div>
-        <div class="col">
-          <h3>Tue</h3>
-          <br /><img src="https://img.icons8.com/color-glass/42/000000/cloud.png" /><br />
-          <p class="weather">Cloudy</p>
-          <span>4°</span>
-        </div>
-        <div class="col">
-          <h3>Wed</h3>
-          <br /><img src="https://img.icons8.com/?size=100&id=81155&format=png&color=000000" /><br />
-          <p class="weather">Cloud-lightning</p>
-          <span>1°</span>
-        </div>
-        <div class="col">
-          <h3>Thur</h3>
-          <br /><img src="https://img.icons8.com/color-glass/42/000000/sun.png" /><br />
-          <p class="weather">Sunny</p>
-          <span>10°</span>
-        </div>
-        <div class="col">
-          <h3>Fri</h3>
-          <br /><img src="https://img.icons8.com/color-glass/42/000000/wind.png" /><br />
-          <p class="weather">Windy</p>
-          <span>5°</span>
-        </div>
-        <div class="col">
-          <h3>Sat</h3>
-          <br /><img src="https://img.icons8.com/color-glass/42/000000/partly-cloudy-day.png" /><br />
-          <p class="weather">Partly cloudy</p>
-          <span>7°</span>
-        </div>
-        <div class="col">
-          <h3>Sun</h3>
-          <br /><img src="https://img.icons8.com/color-glass/42/000000/cloud.png" /><br />
-          <p class="weather">Cloudy</p>
-          <span>3°</span>
-        </div>
-      </div>
-    </section>
-    <!-- A 7 Day Weather forecast -->
-    <section class="container">
-      <div class="row week-forecast" *ngIf="forecastData">
+      <div class="row week-forecast" *ngIf="forecastData.length">
         <div class="col" *ngFor="let day of forecastData">
-          <h3>{{ day.dt | date:'EEE' }}</h3>
+          <h3>{{ day.date | date:'EEE' }}</h3>
           <br />
-          <img [src]="'https://openweathermap.org/img/wn/' + day.weather[0].icon + '@2x.png'" /><br />
-          <p class="weather">{{ day.weather[0].main }}</p>
-          <span>{{ day.temp.day }}°</span>
+          <img [src]="'https://openweathermap.org/img/wn/' + day.icon + '@2x.png'" /><br />
+          <p class="weather">{{ day.weather }}</p>
+          <span>{{ day.temp }}°</span>
         </div>
       </div>
     </section>
