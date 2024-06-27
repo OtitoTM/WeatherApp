@@ -94,7 +94,8 @@ export class HomeComponent implements OnInit {
         icon: dayData[0].weather[0].icon
       });
     }
-
+    
+    
     return dailyForecast;
   }
 
