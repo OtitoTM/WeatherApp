@@ -1,12 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-date-time',
-  standalone: true,
-  imports: [],
   templateUrl: './date-time.component.html',
-  styleUrl: './date-time.component.css'
+  styleUrls: ['./date-time.component.css']
 })
-export class DateTimeComponent {
+export class DateTimeComponent implements OnInit {
+  currentDateTime: Date = new Date();
 
+  constructor() {}
+
+  ngOnInit(): void {
+    setInterval(() => {
+      this.currentDateTime = new Date();
+    }, 1000);
+  }
 }

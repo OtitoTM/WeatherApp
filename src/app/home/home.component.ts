@@ -51,8 +51,7 @@ export class HomeComponent implements OnInit {
     this.weatherService.getForecast(lat, lon).subscribe(
       data => {
         console.log('Forecast Data:', data);
-        const dailyForecast = this.processForecastData(data);
-        this.forecastData = dailyForecast;
+        this.forecastData = data;
       },
       error => {
         console.error('Error fetching forecast data:', error);
@@ -68,35 +67,6 @@ export class HomeComponent implements OnInit {
     this.weatherData.temp_feels_like = data.main.feels_like;
     this.weatherData.isDay = data.weather[0].icon.includes('d');
     this.getForecast(data.coord.lat, data.coord.lon);
-  }
-
-  processForecastData(data: any): any[] {
-    const dailyForecast: any[] = [];
-    const forecastMap: any = {};
-
-    data.list.forEach((entry: any) => {
-      const date = new Date(entry.dt * 1000).toLocaleDateString();
-      if (!forecastMap[date]) {
-        forecastMap[date] = [];
-      }
-      forecastMap[date].push(entry);
-    });
-
-    for (const date in forecastMap) {
-      const dayData = forecastMap[date];
-      const temps = dayData.map((entry: any) => entry.main.temp);
-      const avgTemp = temps.reduce((a: number, b: number) => a + b, 0) / temps.length;
-
-      dailyForecast.push({
-        date,
-        temp: avgTemp,
-        weather: dayData[0].weather[0].description,
-        icon: dayData[0].weather[0].icon
-      });
-    }
-    
-    
-    return dailyForecast;
   }
 
   getCurrentLocationWeather(): void {

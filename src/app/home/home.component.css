@@ -138,17 +138,21 @@ body {
 
 /* Forecast Section */
 .rowweek-forecast {
-    display: inline-block;
-    justify-content: space-around;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
     text-align: center;
 }
 
 .col {
+    display: inline-block;
     background: rgba(218, 210, 210, 0.397);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
+    flex: 1 1 calc(14% - 10px);
 }
 
 .col:hover {
