@@ -1,14 +1,14 @@
-import { DateTimeComponent } from './../date-time/date-time.component';
-import { WeatherService } from './../services/weather.service';
-import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { WeatherService } from './../services/weather.service';
+import { DateTimeComponent } from './../date-time/date-time.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, DatePipe],
+  imports: [CommonModule, RouterModule, FormsModule, DateTimeComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

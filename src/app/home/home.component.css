@@ -1,17 +1,9 @@
+/* Reset and base styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background: linear-gradient(to right, #83a4d4, #b6fbff);
-    color: #333;
-}
-
-.weatherData {
-    display: block;
-    border-radius: 10px;
-    width: 500px;
-    height: 550px;
-    background-color: #0057b396;
     color: #333;
 }
 
@@ -22,11 +14,6 @@ body {
 }
 
 /* Search Section */
-.search-section {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
 #search-form {
     display: flex;
     justify-content: center;
@@ -35,7 +22,7 @@ body {
     margin-bottom: 20px;
 }
 
-#search-input {
+#search-form input {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -56,27 +43,7 @@ body {
     background-color: #0056b3;
 }
 
-.city-title {
-    font-size: 2em;
-    font-weight: bold;
-}
-
-.measurements {
-    font-size: 1.2em;
-    margin-top: 10px;
-}
-
-.measurements a {
-    color: #007bff;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.measurements a:hover {
-    color: #0056b3;
-}
-
-/* Temperatures and Day Info */
+/* Weather Main Display */
 .divWeatherMain {
     display: flex;
     flex-direction: column;
@@ -100,20 +67,17 @@ body {
     text-align: center;
 }
 
-.sun {
-    margin-top: 10px;
-    color: yellow;
-    filter: drop-shadow(1px 1px 10px yellow);
-}
-
-.moon {
+.sun,
+.moon,
+.cloud {
     margin-top: 10px;
     color: white;
     filter: drop-shadow(1px 1px 10px white);
 }
 
-.cloudDiv {
-    margin-top: -20px;
+.sun {
+    color: yellow;
+    filter: drop-shadow(1px 1px 10px yellow);
 }
 
 .cloud {
@@ -137,7 +101,7 @@ body {
 }
 
 /* Forecast Section */
-.rowweek-forecast {
+.week-forecast {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -146,13 +110,13 @@ body {
 }
 
 .col {
-    display: inline-block;
     background: rgba(218, 210, 210, 0.397);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
     flex: 1 1 calc(14% - 10px);
+    cursor: pointer;
 }
 
 .col:hover {
@@ -163,6 +127,24 @@ body {
 .col img {
     width: 42px;
     height: 42px;
+}
+
+/* Time Container Styles */
+.time-container {
+    background-color: #f0f0f0;
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+    /* Adjust margin-top as needed */
+}
+
+.time-container h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.time-container p {
+    font-size: 1.5rem;
 }
 
 /* Footer */

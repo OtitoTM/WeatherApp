@@ -5,6 +5,7 @@
 
 
 <body>
+  <app-date-time></app-date-time>
   <main>
     <section class="container">
       <div class="row">
@@ -54,18 +55,7 @@
         </div>
       </div>
     </section>
-    
-    <section class="container">
-      <div class="row week-forecast" *ngIf="forecastData.length">
-        <div class="col" *ngFor="let day of forecastData">
-          <h3>{{ day.date | date:'EEE' }}</h3>
-          <br />
-          <img [src]="'https://openweathermap.org/img/wn/' + day.icon + '@2x.png'" /><br />
-          <p class="weather">{{ day.weather }}</p>
-          <span>{{ day.temp }}°</span>
-        </div>
-      </div>
-    </section>
+
 
     <footer>
       <p>

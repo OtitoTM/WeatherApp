@@ -7,13 +7,10 @@ import { DateTimeComponent } from './date-time/date-time.component';
 
 
 
-
-
-
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, FormsModule, RouterLinkActive, NavbarComponent, DatePipe], 
+  imports: [CommonModule, RouterOutlet, RouterLink, FormsModule, RouterLinkActive, NavbarComponent, DatePipe, DateTimeComponent ], 
   
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
