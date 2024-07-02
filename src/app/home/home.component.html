@@ -10,7 +10,7 @@
     <section class="container">
       <div class="row">
         <form class="col" id="search-form">
-          <input type="text" name="cityName" placeholder="Enter a city name" [(ngModel)]="city">
+          <input type="text" name="cityName" placeholder="Enter a city name" [(ngModel)]="city",>
           <button type="button" (click)="getWeather()">Get Weather</button>
         </form>
       </div>
@@ -41,6 +41,11 @@
       <div class="weatherWidgetRow" style="font-size: 12px;">
         Humidity: {{ weatherData.main?.humidity }}%
       </div>
+
+      @if (isLoading) {
+      <app-spinner></app-spinner>
+      }
+      
     </div>
     <hr />
 

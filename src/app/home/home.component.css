@@ -1,9 +1,10 @@
-/* Reset and base styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to right, #83a4d4, #b6fbff);
+    background: linear-gradient(rgba(0, 162, 255, 0.384),rgba(255, 255, 255, 0.555)),url(../../images/glass-window-1845534_640.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
     color: #333;
 }
 
@@ -26,7 +27,7 @@ body {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
-    width: 300px;
+    width: 150px;
 }
 
 #search-form button {
@@ -131,6 +132,7 @@ body {
 
 /* Time Container Styles */
 .time-container {
+    position: sticky;
     background-color: #f0f0f0;
     padding: 20px;
     text-align: center;

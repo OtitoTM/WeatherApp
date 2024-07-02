@@ -17,4 +17,9 @@ import { DateTimeComponent } from './date-time/date-time.component';
 })
 export class AppComponent {
   title = 'Weather Website';
-  }
+  isLoading = true;
+  constructor (){
+    setTimeout(() => {
+      this.isLoading = true;
+  },3000);
+  }}

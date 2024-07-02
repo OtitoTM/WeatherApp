@@ -1,18 +1,21 @@
+import { SpinnerComponent } from './../spinner/spinner.component';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { WeatherService } from './../services/weather.service';
 import { DateTimeComponent } from './../date-time/date-time.component';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, DateTimeComponent],
+  imports: [CommonModule, RouterModule, FormsModule, DateTimeComponent, SpinnerComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  @Input()isLoading: boolean = true;
   title = 'HomePage';
   city!: string;
   weatherData: any = {};
