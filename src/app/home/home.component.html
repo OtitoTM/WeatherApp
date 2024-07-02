@@ -13,6 +13,10 @@
           <form class="col" id="search-form">
             <input type="text" name="cityName" placeholder="Enter a city name" [(ngModel)]="city">
             <button type="button" (click)="getWeather()">Get Weather</button>
+            <br>
+            <button (click)="toggleTemperatureUnit()">
+              Switch to {{ isCelsius ? 'Fahrenheit' : 'Celsius' }}
+            </button>
           </form>
         </div>
       </section>
@@ -28,14 +32,15 @@
           <i class="fa-solid fa-cloud cloud"></i>
         </div>
         <div class="weatherWidgetRow" style="font-size: 32px; margin-top: 5px;">
-          {{ weatherData.temp_cecius }}°C
+          {{ getDisplayedTemperature(weatherData.temp_cecius) }}°{{ isCelsius ? 'C' : 'F' }}
         </div>
         <div class="weatherWidgetRow" style="font-size: 12px;">
-          {{ weatherData.temp_min }} / {{ weatherData.temp_max }}°
+          {{ getDisplayedTemperature(weatherData.temp_min) }} / {{ getDisplayedTemperature(weatherData.temp_max) }}°
         </div>
         <div class="weatherWidgetRow" style="font-size: 12px;">
-          Feels Like: {{ weatherData.temp_feels_like }}°
+          Feels Like: {{ getDisplayedTemperature(weatherData.temp_feels_like) }}°
         </div>
+
         <div class="weatherWidgetRow" style="font-size: 25px; margin-top: 10px;">
           {{ weatherData.name }}
         </div>

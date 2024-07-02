@@ -1,8 +1,10 @@
+import { ConversionService } from './../conversion.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { WeatherService } from './../services/weather.service';
+
 import { DateTimeComponent } from './../date-time/date-time.component';
 import { SpinnerComponent } from './../spinner/spinner.component';
 
@@ -19,8 +21,9 @@ export class HomeComponent implements OnInit {
   weatherData: any = {};
   forecastData: any[] = [];
   isLoading = true;
+  isCelsius = true;
 
-  constructor(private weatherService: WeatherService) {}
+  constructor(private weatherService: WeatherService, private ConversionService: ConversionService) {}
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -84,8 +87,11 @@ export class HomeComponent implements OnInit {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         position => {
-          const lat = position.coords.latitude;
-          const lon = position.coords.longitude;
+          let lat = position.coords.latitude;
+          let lon = position.coords.longitude;
+          // Ensure coordinates are limited to two decimal points
+          lat = parseFloat(lat.toFixed(2));
+          lon = parseFloat(lon.toFixed(2));
           this.getWeatherByCoordinates(lat, lon);
         },
         error => {
@@ -97,5 +103,13 @@ export class HomeComponent implements OnInit {
       console.error('Geolocation is not supported by this browser.');
       this.isLoading = false;
     }
+  }
+
+  toggleTemperatureUnit(): void {
+    this.isCelsius = !this.isCelsius;
+  }
+
+  getDisplayedTemperature(temp: number): number {
+    return this.isCelsius ? temp : this.ConversionService.celsiusToFahrenheit(temp);
   }
 }
