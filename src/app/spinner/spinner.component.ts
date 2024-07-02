@@ -9,5 +9,5 @@ import { Input } from '@angular/core';
   styleUrl: './spinner.component.css'
 })
 export class SpinnerComponent {
- 
+  @Input()isLoading: boolean = false;
 }

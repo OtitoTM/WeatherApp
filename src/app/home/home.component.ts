@@ -1,11 +1,10 @@
-import { SpinnerComponent } from './../spinner/spinner.component';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { WeatherService } from './../services/weather.service';
 import { DateTimeComponent } from './../date-time/date-time.component';
-import { Input } from '@angular/core';
+import { SpinnerComponent } from './../spinner/spinner.component';
 
 @Component({
   selector: 'app-home',
@@ -15,26 +14,32 @@ import { Input } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  @Input()isLoading: boolean = true;
   title = 'HomePage';
   city!: string;
   weatherData: any = {};
   forecastData: any[] = [];
+  isLoading = true;
 
   constructor(private weatherService: WeatherService) {}
 
   ngOnInit(): void {
-    this.getCurrentLocationWeather();
+    setTimeout(() => {
+      this.isLoading = false;
+      this.getCurrentLocationWeather();
+    }, 2000); // Show spinner for 2 seconds on component initialization
   }
 
   getWeather(): void {
     if (this.city) {
+      this.isLoading = true;
       this.weatherService.getWeather(this.city).subscribe(
         data => {
           this.processWeatherData(data);
+          this.isLoading = false;
         },
         error => {
           console.error('Error fetching weather data:', error);
+          this.isLoading = false;
         }
       );
     }
@@ -44,9 +49,11 @@ export class HomeComponent implements OnInit {
     this.weatherService.getWeatherByCoordinates(lat, lon).subscribe(
       data => {
         this.processWeatherData(data);
+        this.isLoading = false;
       },
       error => {
         console.error('Error fetching weather data:', error);
+        this.isLoading = false;
       }
     );
   }
@@ -83,10 +90,12 @@ export class HomeComponent implements OnInit {
         },
         error => {
           console.error('Error getting location:', error);
+          this.isLoading = false;
         }
       );
     } else {
       console.error('Geolocation is not supported by this browser.');
+      this.isLoading = false;
     }
   }
 }
