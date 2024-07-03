@@ -1,10 +1,10 @@
 .spinner {
     border: 16px solid white;
-    border-top: 16px solid #551f81a9;
-    border-right: 16px solid rgba(0, 102, 255, 0.685);
+    border-top: 16px solid #551f819c;
+    border-right: 16px solid rgba(17, 0, 255, 0.733);
     border-radius: 50%;
-    width: 120px;
-    height: 120px;
+    width: 90px;
+    height: 90px;
     animation: spin 1s linear infinite;
 }
 

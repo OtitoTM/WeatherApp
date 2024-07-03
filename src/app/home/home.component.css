@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(rgba(0, 162, 255, 0.384),rgba(255, 255, 255, 0.555)),url(../../images/glass-window-1845534_640.jpg);
+    background: linear-gradient(rgba(11, 40, 119, 0.671),rgba(206, 101, 101, 0.322)),url(../../images/glass-window-1845534_640.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     color: #333;
@@ -111,13 +111,15 @@ body {
 }
 
 .col {
-    background: rgba(218, 210, 210, 0.397);
+    background: rgba(218, 210, 210, 0.979);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
     flex: 1 1 calc(14% - 10px);
-    cursor: pointer;
+    cursor: pointer;color: black;
+    font-size: 16px;
+    font-weight: 300;
 }
 
 .col:hover {
@@ -128,25 +130,6 @@ body {
 .col img {
     width: 42px;
     height: 42px;
-}
-
-/* Time Container Styles */
-.time-container {
-    position: sticky;
-    background-color: #f0f0f0;
-    padding: 20px;
-    text-align: center;
-    margin-top: 20px;
-    /* Adjust margin-top as needed */
-}
-
-.time-container h2 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-}
-
-.time-container p {
-    font-size: 1.5rem;
 }
 
 /* Footer */
