@@ -1,8 +1,18 @@
-body {
+.home-container {
+    position: relative;
+}
+
+.loading-message {
+    margin-left: 10px;
+    font-size: 14px;
+    color: #007bff;
+}
+
+main {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(rgba(11, 40, 119, 0.671),rgba(206, 101, 101, 0.322)),url(../../images/glass-window-1845534_640.jpg);
+    background: linear-gradient(rgba(11, 40, 119, 0.671), rgba(206, 101, 101, 0.322)), url(../../images/glass-window-1845534_640.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     color: #333;
@@ -117,7 +127,8 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
     flex: 1 1 calc(14% - 10px);
-    cursor: pointer;color: black;
+    cursor: pointer;
+    color: black;
     font-size: 16px;
     font-weight: 300;
 }

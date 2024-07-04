@@ -17,7 +17,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
 })
 export class AppComponent {
   title = 'Weather Website';
-  isLoading = true;
+  isLoading = true; 
+  
   constructor (){
     setTimeout(() => {
       this.isLoading = false;

@@ -1,73 +1,66 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-  integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-  crossorigin="anonymous" referrerpolicy="no-referrer" />
+<div class="home-container">
+  <main>
+    <section class="container">
+      <div class="row">
+        <form class="col" id="search-form">
+          <input type="text" name="cityName" placeholder="Enter a city name" [(ngModel)]="city">
+          <button type="button" (click)="getWeather()">Get Weather</button>
+          <span *ngIf="isLoadingCity" class="loading-message">Loading...</span>
+          <br>
+          <button type="button" (click)="toggleTemperatureUnit()">
+            Switch to {{ isCelsius ? 'Fahrenheit' : 'Celsius' }}
+          </button>
+        </form>
+      </div>
+    </section>
 
-<app-spinner *ngIf="isLoading"></app-spinner>
-<div *ngIf="!isLoading">
+    <div *ngIf="weatherData.name" class="divWeatherMain">
+      <div *ngIf="weatherData.isDay" class="weatherWidgetRow">
+        <i class="fa-solid fa-sun sun"></i>
+      </div>
+      <div *ngIf="!weatherData.isDay" class="weatherWidgetRow">
+        <i class="fa-solid fa-moon moon"></i>
+      </div>
+      <div class="weatherWidgetRow cloudDiv">
+        <i class="fa-solid fa-cloud cloud"></i>
+      </div>
+      <div class="weatherWidgetRow" style="font-size: 32px; margin-top: 5px;">
+        {{ getDisplayedTemperature(weatherData.temp_celsius) | number:'1.2-2' }}°{{ isCelsius ? 'C' : 'F' }}
+      </div>
+      <div class="weatherWidgetRow" style="font-size: 12px;">
+        {{ getDisplayedTemperature(weatherData.temp_min) | number:'1.2-2' }} / {{
+        getDisplayedTemperature(weatherData.temp_max) | number:'1.2-2' }}°
+      </div>
+      <div class="weatherWidgetRow" style="font-size: 12px;">
+        Feels Like: {{ getDisplayedTemperature(weatherData.temp_feels_like) | number:'1.2-2' }}°
+      </div>
+      <div class="weatherWidgetRow" style="font-size: 25px; margin-top: 10px;">
+        {{ weatherData.name }}
+      </div>
+      <div class="weatherWidgetRow" style="font-size: 12px;">
+        Humidity: {{ weatherData.humidity }}%
+      </div>
+    </div>
+    <hr />
 
-  <body>
-    <app-date-time></app-date-time>
-    <main>
-      <section class="container">
-        <div class="row">
-          <form class="col" id="search-form">
-            <input type="text" name="cityName" placeholder="Enter a city name" [(ngModel)]="city">
-            <button type="button" (click)="getWeather()">Get Weather</button>
-            <br>
-            <button (click)="toggleTemperatureUnit()">
-              Switch to {{ isCelsius ? 'Fahrenheit' : 'Celsius' }}
-            </button>
-          </form>
-        </div>
-      </section>
-
-      <div class="divWeatherMain" *ngIf="weatherData">
-        <div *ngIf="weatherData.isDay" class="weatherWidgetRow">
-          <i class="fa-solid fa-sun sun"></i>
-        </div>
-        <div *ngIf="!weatherData.isDay" class="weatherWidgetRow">
-          <i class="fa-solid fa-moon moon"></i>
-        </div>
-        <div class="weatherWidgetRow cloudDiv">
-          <i class="fa-solid fa-cloud cloud"></i>
-        </div>
-        <div class="weatherWidgetRow" style="font-size: 32px; margin-top: 5px;">
-          {{ getDisplayedTemperature(weatherData.temp_cecius) }}°{{ isCelsius ? 'C' : 'F' }}
-        </div>
-        <div class="weatherWidgetRow" style="font-size: 12px;">
-          {{ getDisplayedTemperature(weatherData.temp_min) }} / {{ getDisplayedTemperature(weatherData.temp_max) }}°
-        </div>
-        <div class="weatherWidgetRow" style="font-size: 12px;">
-          Feels Like: {{ getDisplayedTemperature(weatherData.temp_feels_like) }}°
-        </div>
-
-        <div class="weatherWidgetRow" style="font-size: 25px; margin-top: 10px;">
-          {{ weatherData.name }}
-        </div>
-        <div class="weatherWidgetRow" style="font-size: 12px;">
-          Humidity: {{ weatherData.main?.humidity }}%
+    <section class="container">
+      <div class="row week-forecast" *ngIf="forecastData.length">
+        <div class="col" *ngFor="let day of forecastData">
+          <h3>{{ day.date | date:'EEE' }}</h3>
+          <br />
+          <img [src]="'https://openweathermap.org/img/wn/' + day.icon + '@2x.png'" /><br />
+          <p class="weather">{{ day.weather }}</p>
+          <p class="temperature">{{ day.temp | number:'1.0-0' }}°C</p>
         </div>
       </div>
-      <hr />
+    </section>
 
-      <section class="container">
-        <div class="row week-forecast" *ngIf="forecastData.length">
-          <div class="col" *ngFor="let day of forecastData">
-            <h3>{{ day.date | date:'EEE' }}</h3>
-            <br />
-            <img [src]="'https://openweathermap.org/img/wn/' + day.icon + '@2x.png'" /><br />
-            <p class="weather">{{ day.weather }}</p>
-            <span>{{ day.temp }}°</span>
-          </div>
-        </div>
-      </section>
-
-      <footer>
-        <p>
-          Designed and coded by
-          <a href="https://github.com/OtitoTM/WeatherApp.git" target="_blank">OtitoTM</a><span>✌🏼</span>
-        </p>
-      </footer>
-    </main>
-  </body>
+        <footer>
+          <p>
+            Designed and coded by
+            <a href="https://github.com/OtitoTM/WeatherApp.git" target="_blank">OtitoTM</a><span>✌🏼</span>
+          </p>
+        </footer>
+        
+  </main>
 </div>
