@@ -1,17 +1,18 @@
+import { CityService } from './../city.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { WeatherService } from './../services/weather.service';
-import { ConversionService } from './../conversion.service';
-
-import { DateTimeComponent } from './../date-time/date-time.component';
-import { SpinnerComponent } from './../spinner/spinner.component';
+import { WeatherService } from '../services/weather.service';
+import { ConversionService } from '../conversion.service';
+import { DateTimeComponent } from '../date-time/date-time.component';
+import { SpinnerComponent } from '../spinner/spinner.component';
+import { CityListComponent } from '../city-list/city-list.component'; 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, DateTimeComponent, SpinnerComponent],
+  imports: [CommonModule, RouterModule, FormsModule, DateTimeComponent, SpinnerComponent, CityListComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit {
   isLoadingCity = false;
   isCelsius = true;
 
-  constructor(private weatherService: WeatherService, private conversionService: ConversionService) {}
+  constructor(private weatherService: WeatherService, private conversionService: ConversionService, private CityService: CityService) {}
 
   ngOnInit(): void {
     this.getCurrentLocationWeather();
@@ -63,7 +64,7 @@ export class HomeComponent implements OnInit {
   getForecast(lat: number, lon: number): void {
     this.weatherService.getForecast(lat, lon).subscribe(
       data => {
-        this.forecastData = data; // Assign forecast data directly
+        this.forecastData = data;
       },
       error => {
         console.error('Error fetching forecast data:', error);

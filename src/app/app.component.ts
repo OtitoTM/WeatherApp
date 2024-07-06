@@ -11,14 +11,14 @@ import { SpinnerComponent } from './spinner/spinner.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, FormsModule, RouterLinkActive, NavbarComponent, DatePipe, DateTimeComponent,SpinnerComponent ], 
+  imports: [CommonModule, RouterOutlet, RouterLink, FormsModule, RouterLinkActive, NavbarComponent, DatePipe, DateTimeComponent,SpinnerComponent, ], 
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'Weather Website';
   isLoading = true; 
-  
+
   constructor (){
     setTimeout(() => {
       this.isLoading = false;
