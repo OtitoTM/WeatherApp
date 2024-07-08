@@ -1,16 +1,16 @@
-<div>
+<div class="container">
     <h2>List of Cities</h2>
-    <ul>
+    <ul class="city-list">
         <li *ngFor="let city of cities">
             {{ city.name }}
         </li>
     </ul>
 
-    <form (ngSubmit)="saveCity(newCityName.value); newCityName.value = ''">
+    <form class="city-form" (ngSubmit)="saveCity(newCityName.value); newCityName.value = ''">
         <label for="newCityName">New City Name:</label>
         <input id="newCityName" type="text" #newCityName required>
         <button type="submit">Save City</button>
     </form>
 
-    <button (click)="getAllCities()">Refresh Cities</button>
+    <button class="refresh-button" (click)="getAllCities()">Refresh Cities</button>
 </div>

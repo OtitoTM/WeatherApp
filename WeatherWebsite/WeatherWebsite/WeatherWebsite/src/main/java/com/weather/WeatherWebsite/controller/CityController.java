@@ -33,4 +33,14 @@ public class CityController {
     Optional<City> city = cityRepository.findById(id);
     return city.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
   }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> deleteCity(@PathVariable Long id) {
+    if (cityRepository.existsById(id)) {
+      cityRepository.deleteById(id);
+      return ResponseEntity.noContent().build();
+    } else {
+      return ResponseEntity.notFound().build();
+    }
+  }
 }

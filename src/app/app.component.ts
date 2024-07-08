@@ -22,5 +22,5 @@ export class AppComponent {
   constructor (){
     setTimeout(() => {
       this.isLoading = false;
-  },3000);
+  },5000);
   }}

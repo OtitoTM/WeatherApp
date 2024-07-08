@@ -33,16 +33,16 @@ export class CityListComponent implements OnInit {
   }
 
   saveCity(name: string): void {
-    const city: City = { name }; // Assuming your City interface has a 'name' property
+    const city: City = { name }; 
     this.cityService.saveCity(city).subscribe(
       savedCity => {
         console.log('City saved:', savedCity);
-        // Optionally, update the list of cities after saving
+        // update the list of cities after saving
         this.getAllCities();
       },
       error => {
         console.error('Error saving city:', error);
-        // Handle error appropriately, e.g., show error message
+        // show error message
       }
     );
   }
@@ -55,7 +55,7 @@ export class CityListComponent implements OnInit {
       },
       error => {
         console.error('Error fetching city by ID:', error);
-        // Handle error appropriately, e.g., show error message
+        //  show error message
       }
     );
   }
