@@ -7,7 +7,7 @@ import { City } from './models/models'; // Ensure correct path
   providedIn: 'root'
 })
 export class CityService {
-  private apiUrl = `http://127.0.0.1:8080/api/cities`;
+  private apiUrl = `http://localhost:8080/api/cities`;
 
   constructor(private http: HttpClient) {}
 
