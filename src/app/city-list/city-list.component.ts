@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class CityListComponent implements OnInit {
   cities: City[] = [];
+  showForm: boolean = true;
 
   constructor(private cityService: CityService) { }
 
@@ -27,36 +28,44 @@ export class CityListComponent implements OnInit {
       },
       error => {
         console.error('Error fetching cities:', error);
-        //  show error message
+        // Show error message
       }
     );
   }
 
   saveCity(name: string): void {
-    const city: City = { name }; 
+    const city: City = {
+      name,
+      id: 0
+    }; 
     this.cityService.saveCity(city).subscribe(
       savedCity => {
         console.log('City saved:', savedCity);
-        // update the list of cities after saving
+        // Update the list of cities after saving
         this.getAllCities();
       },
       error => {
         console.error('Error saving city:', error);
-        // show error message
+        // Show error message
       }
     );
   }
 
-  getCityById(id: number): void {
-    this.cityService.getCityById(id).subscribe(
-      city => {
-        console.log('City by ID:', city);
-        // Process the retrieved city as needed
+  deleteCity(id: number): void {
+    this.cityService.deleteCity(id).subscribe(
+      () => {
+        console.log('City deleted');
+        // Update the list of cities after deletion
+        this.getAllCities();
       },
       error => {
-        console.error('Error fetching city by ID:', error);
-        //  show error message
+        console.error('Error deleting city:', error);
+        // Show error message
       }
     );
+  }
+
+  toggleForm(): void {
+    this.showForm = !this.showForm;
   }
 }
