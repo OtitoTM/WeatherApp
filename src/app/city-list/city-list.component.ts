@@ -7,15 +7,16 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-city-list',
   standalone: true,
-  imports:[CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './city-list.component.html',
   styleUrls: ['./city-list.component.css']
 })
 export class CityListComponent implements OnInit {
   cities: City[] = [];
-  showForm: boolean = true;
+  selectedCity: City | null = null;
+  showForm = false;
 
-  constructor(private cityService: CityService) { }
+  constructor(private cityService: CityService) {}
 
   ngOnInit(): void {
     this.getAllCities();
@@ -34,10 +35,7 @@ export class CityListComponent implements OnInit {
   }
 
   saveCity(name: string): void {
-    const city: City = {
-      name,
-      id: 0
-    }; 
+    const city: City = { name }; // Correctly define the City object
     this.cityService.saveCity(city).subscribe(
       savedCity => {
         console.log('City saved:', savedCity);
@@ -60,6 +58,42 @@ export class CityListComponent implements OnInit {
       },
       error => {
         console.error('Error deleting city:', error);
+        // Show error message
+      }
+    );
+  }
+
+  selectCity(city: City): void {
+    this.selectedCity = city;
+    if (city.id) {
+      this.getCityWeather(city.id);
+      this.getCityWeatherHistory(city.id);
+    }
+  }
+
+  getCityWeather(id: number): void {
+    this.cityService.getCityWeather(id).subscribe(
+      weatherData => {
+        if (this.selectedCity) {
+          this.selectedCity.weatherData = weatherData;
+        }
+      },
+      error => {
+        console.error('Error fetching weather data:', error);
+        // Show error message
+      }
+    );
+  }
+
+  getCityWeatherHistory(id: number): void {
+    this.cityService.getCityWeatherHistory(id).subscribe(
+      weatherHistory => {
+        if (this.selectedCity) {
+          this.selectedCity.weatherHistory = weatherHistory;
+        }
+      },
+      error => {
+        console.error('Error fetching weather history:', error);
         // Show error message
       }
     );

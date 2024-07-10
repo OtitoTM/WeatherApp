@@ -1,7 +1,7 @@
 <div class="container">
     <h2>List of Favourite Cities</h2>
     <ul class="city-list">
-        <li *ngFor="let city of cities">
+        <li *ngFor="let city of cities" (click)="selectCity(city)">
             {{ city.name }}
             <button *ngIf="city.id !== undefined" (click)="deleteCity(city.id!)" class="delete-button">Delete</button>
         </li>
@@ -18,4 +18,24 @@
     </form>
 
     <button class="refresh-button" (click)="getAllCities()">Refresh Cities</button>
+
+    <div *ngIf="selectedCity">
+        <h3>Weather Data for {{ selectedCity.name }}</h3>
+        <div *ngIf="selectedCity.weatherData">
+            <p>Temperature: {{ selectedCity.weatherData.temperature }}°C</p>
+            <p>Humidity: {{ selectedCity.weatherData.humidity }}%</p>
+            <p>Description: {{ selectedCity.weatherData.description }}</p>
+        </div>
+        <h3>Weather History</h3>
+        <div *ngIf="selectedCity.weatherHistory">
+            <ul>
+                <li *ngFor="let history of selectedCity.weatherHistory">
+                    <p>Date: {{ history.date | date }}</p>
+                    <p>Temperature: {{ history.temperature }}°C</p>
+                    <p>Humidity: {{ history.humidity }}%</p>
+                    <p>Description: {{ history.description }}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
