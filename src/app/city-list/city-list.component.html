@@ -1,8 +1,8 @@
 <div class="container">
     <h2>List of Favourite Cities</h2>
     <ul class="city-list">
-        <li *ngFor="let city of cities" (click)="selectCity(city)">
-            {{ city.name }}
+        <li *ngFor="let city of cities" (click)="selectCity(city)" class="city-item">
+            <span class="city-name">{{ city.name }}</span>
             <button class="delete-button" (click)="deleteCity(city.id); $event.stopPropagation();">Delete</button>
         </li>
     </ul>

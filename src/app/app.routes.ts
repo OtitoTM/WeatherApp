@@ -3,6 +3,7 @@ import { HomeComponent } from './home/home.component';
 import { NewsComponent } from './news/news.component';
 import { ContactComponent } from './contact/contact.component';
 import { PhotoComponent } from './photo/photo.component';
+import { CityListComponent } from './city-list/city-list.component';
 
 
 export const routes: Routes = [
@@ -19,6 +20,12 @@ export const routes: Routes = [
     {
         path: 'photo',
         component: PhotoComponent
+    },
+    {
+        path: 'cities', component: CityListComponent
+    },
+    { path: ''
+        , redirectTo: '/home', pathMatch: 'full'
     },
 
 ];
