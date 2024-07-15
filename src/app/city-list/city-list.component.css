@@ -1,19 +1,9 @@
-/* Container styling */
 .container {
-    margin: 0 auto;
-    padding: 20px;
-    max-width: 600px;
-    font-family: Arial, sans-serif;
-    background-color: #2022248a;
+    margin: 20px;
+    background-color: #2918188e;
     border-radius: 8px;
+    padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Heading styling */
-h2 {
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
 }
 
 .city-list {
@@ -25,53 +15,99 @@ h2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+    padding: 10px 15px;
+    border-bottom: 1px solid #e0e0e0;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .city-item:hover {
     background-color: #f0f0f0;
+    transform: translateY(-2px);
 }
 
 .city-name {
     flex-grow: 1;
+    font-size: 1.1em;
 }
 
 .delete-button {
     background-color: #ff4d4d;
-    border: none;
     color: white;
+    border: none;
     padding: 5px 10px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    border-radius: 4px;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .delete-button:hover {
     background-color: #ff1a1a;
+    transform: scale(1.1);
 }
 
 .toggle-form-button,
 .refresh-button {
-    margin-top: 20px;
+    margin: 10px 5px;
+    padding: 8px 15px;
+    font-size: 0.9em;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.toggle-form-button:hover,
+.refresh-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
 }
 
 .city-form {
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
 }
 
 .city-form label {
-    display: block;
     margin-bottom: 5px;
+    font-size: 0.9em;
 }
 
-.city-form input {
-    width: calc(100% - 22px);
-    padding: 10px;
+.city-form .input-field {
     margin-bottom: 10px;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9em;
 }
 
-.city-form button {
-    padding: 10px 20px;
+.city-form .save-button {
+    padding: 6px 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.city-form .save-button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.weather-data-section {
+    margin-top: 20px;
+}
+
+.weather-widget {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

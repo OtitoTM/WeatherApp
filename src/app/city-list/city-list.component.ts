@@ -3,18 +3,20 @@ import { CityService } from '../city.service';
 import { City, WeatherData } from '../models/models';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SpinnerComponent } from "../spinner/spinner.component";
 
 @Component({
   selector: 'app-city-list',
   standalone: true,
-  imports:[CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SpinnerComponent],
   templateUrl: './city-list.component.html',
   styleUrls: ['./city-list.component.css']
 })
 export class CityListComponent implements OnInit {
   cities: City[] = [];
-  selectedCity?: City;
-  showForm: boolean = true;
+  selectedCity: City | null = null;
+  showForm: boolean = false;
+  isLoading: boolean = true;
 
   constructor(private cityService: CityService) { }
 
@@ -23,17 +25,25 @@ export class CityListComponent implements OnInit {
   }
 
   getAllCities(): void {
+    this.isLoading = true;
     this.cityService.getAllCities().subscribe(
       cities => {
         this.cities = cities;
+        this.isLoading = false;
       },
       error => {
         console.error('Error fetching cities:', error);
+        this.isLoading = false;
       }
     );
   }
 
   saveCity(name: string): void {
+    if (this.cities.some(city => city.name.toLowerCase() === name.toLowerCase())) {
+      alert('City has already been added.');
+      return;
+    }
+
     const city: City = { name };
     this.cityService.saveCity(city).subscribe(
       savedCity => {
@@ -48,15 +58,17 @@ export class CityListComponent implements OnInit {
 
   deleteCity(id?: number): void {
     if (id !== undefined) {
-      this.cityService.deleteCity(id).subscribe(
-        () => {
-          console.log('City deleted');
-          this.getAllCities();
-        },
-        error => {
-          console.error('Error deleting city:', error);
-        }
-      );
+      if (confirm('Are you sure you want to delete this city?')) {
+        this.cityService.deleteCity(id).subscribe(
+          () => {
+            console.log('City deleted');
+            this.getAllCities();
+          },
+          error => {
+            console.error('Error deleting city:', error);
+          }
+        );
+      }
     }
   }
 
@@ -66,6 +78,12 @@ export class CityListComponent implements OnInit {
       this.getWeatherData(city.id);
       this.getWeatherHistory(city.id);
     }
+    setTimeout(() => {
+      const element = document.querySelector('.weather-data-section');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 0);
   }
 
   getWeatherData(id: number): void {

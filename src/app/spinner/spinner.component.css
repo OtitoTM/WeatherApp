@@ -1,19 +1,35 @@
 .spinner {
-    border: 16px solid white;
-    border-top: 16px solid #551f819c;
-    border-right: 16px solid rgba(17, 0, 255, 0.733);
-    border-radius: 50%;
-    width: 90px;
-    height: 90px;
-    animation: spin 1s linear infinite;
+    margin: 100px auto;
+    width: 70px;
+    text-align: center;
 }
 
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
+.spinner>div {
+    width: 18px;
+    height: 18px;
+    background-color: #333;
+    border-radius: 100%;
+    display: inline-block;
+    animation: bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+    animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+    animation-delay: -0.16s;
+}
+
+@keyframes bouncedelay {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(0);
     }
 
-    100% {
-        transform: rotate(360deg);
+    40% {
+        transform: scale(1.0);
     }
 }

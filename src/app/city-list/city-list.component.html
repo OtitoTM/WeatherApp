@@ -1,32 +1,40 @@
 <div class="container">
-    <h2>List of Favourite Cities</h2>
-    <ul class="city-list">
-        <li *ngFor="let city of cities" (click)="selectCity(city)" class="city-item">
-            <span class="city-name">{{ city.name }}</span>
-            <button class="delete-button" (click)="deleteCity(city.id); $event.stopPropagation();">Delete</button>
-        </li>
-    </ul>
+    <app-spinner [isLoading]="isLoading"></app-spinner>
 
-    <button class="toggle-form-button" (click)="toggleForm()">
-        {{ showForm ? 'Hide' : 'Show' }} Form
-    </button>
-
-    <form *ngIf="showForm" class="city-form" (ngSubmit)="saveCity(newCityName.value); newCityName.value = ''">
-        <label for="newCityName">New City Name:</label>
-        <input id="newCityName" type="text" #newCityName required>
-        <button type="submit">Save City</button>
-    </form>
-
-    <button class="refresh-button" (click)="getAllCities()">Refresh Cities</button>
-
-    <div *ngIf="selectedCity">
-        <h3>Weather Data for {{ selectedCity.name }}</h3>
-        <pre>{{ selectedCity.weatherData | json }}</pre>
-        <h3>Weather History for {{ selectedCity.name }}</h3>
-        <ul>
-            <li *ngFor="let history of selectedCity.weatherHistory">
-                <pre>{{ history | json }}</pre>
+    <div *ngIf="!isLoading">
+        <h2>List of Favourite Cities</h2>
+        <ul class="city-list">
+            <li *ngFor="let city of cities" (click)="selectCity(city)" class="city-item">
+                <span class="city-name">{{ city.name }}</span>
+                <button class="delete-button" (click)="deleteCity(city.id); $event.stopPropagation();">Delete</button>
             </li>
         </ul>
+
+        <button class="toggle-form-button" (click)="toggleForm()">
+            {{ showForm ? 'Hide' : 'Show' }} Form
+        </button>
+
+        <form *ngIf="showForm" class="city-form" (ngSubmit)="saveCity(newCityName.value); newCityName.value = ''">
+            <label for="newCityName">New City Name:</label>
+            <input id="newCityName" type="text" #newCityName required class="input-field">
+            <button type="submit" class="save-button">Save City</button>
+        </form>
+
+        <button class="refresh-button" (click)="getAllCities()">Refresh Cities</button>
+
+        <div *ngIf="selectedCity" class="weather-data-section">
+            <div class="weather-widget">
+                <h3>Weather Data for {{ selectedCity.name }}</h3>
+                <pre>{{ selectedCity.weatherData | json }}</pre>
+            </div>
+            <div class="weather-widget">
+                <h3>Weather History for {{ selectedCity.name }}</h3>
+                <ul>
+                    <li *ngFor="let history of selectedCity.weatherHistory">
+                        <pre>{{ history | json }}</pre>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
