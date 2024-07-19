@@ -10,7 +10,7 @@
     background-color: #333;
     border-radius: 100%;
     display: inline-block;
-    animation: bouncedelay 1.4s infinite ease-in-out both;
+    animation: bouncedelay 2.0s infinite ease-in-out both;
 }
 
 .spinner .bounce1 {

@@ -15,7 +15,7 @@ import { SpinnerComponent } from "../spinner/spinner.component";
 export class CityListComponent implements OnInit {
   cities: City[] = [];
   selectedCity: City | null = null;
-  showForm: boolean = false;
+  showForm: boolean = true;
   isLoading: boolean = true;
 
   constructor(private cityService: CityService) { }
@@ -83,7 +83,7 @@ export class CityListComponent implements OnInit {
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
-    }, 0);
+    }, 100);
   }
 
   getWeatherData(id: number): void {
