@@ -51,7 +51,7 @@
     margin: 10px 5px;
     padding: 8px 15px;
     font-size: 0.9em;
-    background-color: #007bff;
+    background-color: rgba(0, 123, 255, 0.336);
     color: white;
     border: none;
     border-radius: 4px;
@@ -85,7 +85,7 @@
 }
 
 .city-form .save-button {
-    padding: 3px 6px;
+    padding: 7px 6px;
     background-color: #1c70dd;
     color: white;
     border: none;
@@ -95,7 +95,7 @@
 }
 
 .city-form .save-button:hover {
-    background-color: #218838;
+    background-color: rgb(45, 79, 129);
     transform: translateY(-2px);
 }
 
@@ -110,4 +110,9 @@
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
 }

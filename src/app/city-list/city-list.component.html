@@ -22,6 +22,10 @@
 
         <button class="refresh-button" (click)="getAllCities()">Refresh Cities</button>
 
+        <div *ngIf="errorMessage" class="error-message">
+            {{ errorMessage }}
+        </div>
+
         <div *ngIf="selectedCity" class="weather-data-section">
             <div class="weather-widget">
                 <h3>Weather Data for {{ selectedCity.name }}</h3>
