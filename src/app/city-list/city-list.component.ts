@@ -17,7 +17,9 @@ export class CityListComponent implements OnInit {
   selectedCity: City | null = null;
   showForm: boolean = true;
   isLoading: boolean = true;
-  errorMessage: string = '';
+  newCityName: string = '';
+  favoriteCities: City[] = [];
+  weatherData: WeatherData | null = null;
 
   constructor(private cityService: CityService) { }
 
@@ -35,29 +37,17 @@ export class CityListComponent implements OnInit {
       error => {
         console.error('Error fetching cities:', error);
         this.isLoading = false;
-        this.errorMessage = 'Error fetching cities. Please try again later.';
       }
     );
   }
 
-  validateCityName(name: string): boolean {
-    if (!name || name.trim() === '') {
-      this.errorMessage = 'City name cannot be empty.';
-      return false;
-    }
-    if (this.cities.some(city => city.name.toLowerCase() === name.toLowerCase())) {
-      this.errorMessage = 'This city is already in the list.';
-      return false;
-    }
-    this.errorMessage = '';
-    return true;
-  }
-
-  saveCity(name: string): void {
-    if (!this.validateCityName(name)) {
+  saveCity(): void {
+    if (this.cities.some(city => city.name.toLowerCase() === this.newCityName.toLowerCase())) {
+      alert('City has already been added.');
       return;
     }
-    const city: City = { name };
+
+    const city: City = { name: this.newCityName };
     this.cityService.saveCity(city).subscribe(
       savedCity => {
         console.log('City saved:', savedCity);
@@ -65,7 +55,6 @@ export class CityListComponent implements OnInit {
       },
       error => {
         console.error('Error saving city:', error);
-        this.errorMessage = 'Error saving city. Please try again.';
       }
     );
   }
@@ -80,7 +69,6 @@ export class CityListComponent implements OnInit {
           },
           error => {
             console.error('Error deleting city:', error);
-            this.errorMessage = 'Error deleting city. Please try again.';
           }
         );
       }
@@ -89,42 +77,16 @@ export class CityListComponent implements OnInit {
 
   selectCity(city: City): void {
     this.selectedCity = city;
-    if (city.id !== undefined) {
-      this.getWeatherData(city.id);
-      this.getWeatherHistory(city.id);
-    }
-    setTimeout(() => {
-      const element = document.querySelector('.weather-data-section');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 100);
+    this.fetchWeatherData(city.name);
   }
 
-  getWeatherData(id: number): void {
-    this.cityService.getCityWeather(id).subscribe(
+  fetchWeatherData(cityName: string): void {
+    this.cityService.getCityWeather(cityName).subscribe(
       data => {
-        if (this.selectedCity) {
-          this.selectedCity.weatherData = data;
-        }
+        this.weatherData = data;
       },
       error => {
         console.error('Error fetching weather data:', error);
-        this.errorMessage = 'Error fetching weather data. Please try again.';
-      }
-    );
-  }
-
-  getWeatherHistory(id: number): void {
-    this.cityService.getCityWeatherHistory(id).subscribe(
-      data => {
-        if (this.selectedCity) {
-          this.selectedCity.weatherHistory = data;
-        }
-      },
-      error => {
-        console.error('Error fetching weather history:', error);
-        this.errorMessage = 'Error fetching weather history. Please try again.';
       }
     );
   }

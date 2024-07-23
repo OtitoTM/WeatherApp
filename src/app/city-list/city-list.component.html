@@ -1,43 +1,25 @@
 <div class="container">
-    <app-spinner [isLoading]="isLoading"></app-spinner>
-
-    <div *ngIf="!isLoading">
-        <h2>List of Favourite Cities</h2>
-        <ul class="city-list">
-            <li *ngFor="let city of cities" (click)="selectCity(city)" class="city-item">
+    <div class="city-form" *ngIf="showForm">
+        <label for="city-name">New City Name:</label>
+        <input id="city-name" class="input-field" type="text" [(ngModel)]="newCityName">
+        <button class="save-button" (click)="saveCity()">Save</button>
+    </div>
+    <button class="refresh-button" (click)="getAllCities()">Refresh Cities</button>
+    <div class="city-widget-container">
+        <div class="city-widget" *ngFor="let city of cities" (click)="selectCity(city)">
+            <div class="widget-header">
                 <span class="city-name">{{ city.name }}</span>
-                <button class="delete-button" (click)="deleteCity(city.id); $event.stopPropagation();">Delete</button>
-            </li>
-        </ul>
-
-        <button class="toggle-form-button" (click)="toggleForm()">
-            {{ showForm ? 'Hide' : 'Show' }} Form
-        </button>
-
-        <form *ngIf="showForm" class="city-form" (ngSubmit)="saveCity(newCityName.value); newCityName.value = ''">
-            <label for="newCityName">New City Name:</label>
-            <input id="newCityName" type="text" #newCityName required class="input-field">
-            <button type="submit" class="save-button">Save City</button>
-        </form>
-
-        <button class="refresh-button" (click)="getAllCities()">Refresh Cities</button>
-
-        <div *ngIf="errorMessage" class="error-message">
-            {{ errorMessage }}
-        </div>
-
-        <div *ngIf="selectedCity" class="weather-data-section">
-            <div class="weather-widget">
-                <h3>Weather Data for {{ selectedCity.name }}</h3>
-                <pre>{{ selectedCity.weatherData | json }}</pre>
+                <button class="delete-button" (click)="deleteCity(city.id)">Delete</button>
             </div>
-            <div class="weather-widget">
-                <h3>Weather History for {{ selectedCity.name }}</h3>
-                <ul>
-                    <li *ngFor="let history of selectedCity.weatherHistory">
-                        <pre>{{ history | json }}</pre>
-                    </li>
-                </ul>
+            <div class="widget-body">
+                <div class="widget-temperature" *ngIf="selectedCity?.name === city.name && weatherData">
+                    {{ weatherData.temp }} °C
+                </div>
+                <div *ngIf="selectedCity?.name === city.name && weatherData">
+                    <p>Weather: {{ weatherData.weather }}</p>
+                    <p>Humidity: {{ weatherData.humidity }}%</p>
+                    <img [src]="'http://openweathermap.org/img/w/' + weatherData.icon + '.png'" alt="Weather icon">
+                </div>
             </div>
         </div>
     </div>

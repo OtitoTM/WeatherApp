@@ -1,102 +1,138 @@
 .container {
-    margin: 20px;
-    background-color: #2918188e;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.city-list {
-    list-style: none;
     padding: 0;
-}
-
-.city-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 15px;
-    border-bottom: 1px solid #e0e0e0;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-.city-item:hover {
-    background-color: #f0f0f0;
-    transform: translateY(-2px);
-}
-
-.city-name {
-    flex-grow: 1;
-    font-size: 1.1em;
-}
-
-.delete-button {
-    background-color: #ff4d4d;
-    color: white;
+    margin: 20px;
+    background-color: rgb(44, 103, 172);
     border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-.delete-button:hover {
-    background-color: #ff1a1a;
-    transform: scale(1.1);
-}
-
-.toggle-form-button,
-.refresh-button {
-    margin: 10px 5px;
-    padding: 8px 15px;
-    font-size: 0.9em;
-    background-color: rgba(0, 123, 255, 0.336);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-.toggle-form-button:hover,
-.refresh-button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
+    border-radius: 10px;
+    /* Added for rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Added for subtle shadow */
 }
 
 .city-form {
     display: flex;
-    flex-direction: column;
-    margin: 10px 0;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    /* Added padding */
+    background-color: #fff;
+    /* White background for the form */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
 }
 
 .city-form label {
-    margin-bottom: 5px;
-    font-size: 0.9em;
+    margin-right: 10px;
 }
 
-.city-form .input-field {
-    margin-bottom: 10px;
-    padding: 6px;
-    border: 1px solid #f1f1f1;
-    border-radius: 4px;
-    font-size: 0.9em;
+.input-field {
+    flex: 2;
+    margin-right: 10px;
+    padding: 10px;
+    /* Added padding for better appearance */
+    border: 1px solid #ccc;
+    /* Border for input field */
+    border-radius: 5px;
+    /* Rounded corners for input field */
+    font-size: 1em;
+    /* Font size for input field */
 }
 
-.city-form .save-button {
-    padding: 7px 6px;
-    background-color: #1c70dd;
+.save-button,
+.refresh-button {
+    flex: 1;
+    /* Ensures each button takes an equal amount of space */
+    background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 4px;
+    padding: 10px;
+    /* Adjusted padding */
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
+    transition: background-color 0.3s;
+    margin-left: 10px;
+    /* Space between buttons */
+    border-radius: 5px;
+    /* Rounded corners for buttons */
+    font-size: 1em;
+    /* Font size for buttons */
+    display: inline-block;
+    /* Ensures buttons stay inline */
+    text-align: center;
+    /* Centers text inside buttons */
 }
 
-.city-form .save-button:hover {
-    background-color: rgb(45, 79, 129);
-    transform: translateY(-2px);
+.save-button:hover,
+.refresh-button:hover {
+    background-color: #0056b3;
+}
+
+.city-widget-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.city-widget {
+    background-color: #e0f7fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+    flex: 1 1 calc(33.333% - 20px);
+    min-width: 200px;
+}
+
+.city-widget:hover {
+    transform: translateY(-5px);
+    background-color: #b2ebf2;
+}
+
+.widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.city-name {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.delete-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+    /* Rounded corners for delete button */
+}
+
+.delete-button:hover {
+    background-color: darkred;
+}
+
+.widget-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.widget-temperature {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.widget-footer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .weather-data-section {
@@ -104,15 +140,9 @@
 }
 
 .weather-widget {
-    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin-top: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.error-message {
-    color: red;
-    margin-top: 10px;
+    margin-bottom: 20px;
 }

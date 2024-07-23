@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { City, WeatherData } from './models/models';
+import { WeatherService } from './services/weather.service'; // Import WeatherService
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { City, WeatherData } from './models/models';
 export class CityService {
   private apiUrl = 'http://localhost:8080/api/cities';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private weatherService: WeatherService) {}
 
   getAllCities(): Observable<City[]> {
     return this.http.get<City[]>(this.apiUrl);
@@ -23,8 +24,8 @@ export class CityService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  getCityWeather(id: number): Observable<WeatherData> {
-    return this.http.get<WeatherData>(`${this.apiUrl}/${id}/weather`);
+  getCityWeather(cityName: string): Observable<WeatherData> {
+    return this.weatherService.getWeather(cityName); // Fetch weather data using WeatherService
   }
 
   getCityWeatherHistory(id: number): Observable<WeatherData[]> {
