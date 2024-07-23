@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { City, WeatherData } from './models/models';
-import { WeatherService } from './services/weather.service'; // Import WeatherService
+import { WeatherService } from './services/weather.service'; 
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class CityService {
   private apiUrl = 'http://localhost:8080/api/cities';
 

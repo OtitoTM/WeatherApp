@@ -5,6 +5,7 @@
         <button class="save-button" (click)="saveCity()">Save</button>
     </div>
     <button class="refresh-button" (click)="getAllCities()">Refresh Cities</button>
+    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
     <div class="city-widget-container">
         <div class="city-widget" *ngFor="let city of cities" (click)="selectCity(city)">
             <div class="widget-header">

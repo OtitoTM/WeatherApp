@@ -1,3 +1,4 @@
+import { WeatherService } from './../services/weather.service';
 import { Component, OnInit } from '@angular/core';
 import { CityService } from '../city.service';
 import { City, WeatherData } from '../models/models';
@@ -20,8 +21,9 @@ export class CityListComponent implements OnInit {
   newCityName: string = '';
   favoriteCities: City[] = [];
   weatherData: WeatherData | null = null;
+  errorMessage: string = '';
 
-  constructor(private cityService: CityService) { }
+  constructor(private cityService: CityService, private weatherService: WeatherService) { }
 
   ngOnInit(): void {
     this.getAllCities();
@@ -42,19 +44,33 @@ export class CityListComponent implements OnInit {
   }
 
   saveCity(): void {
+    this.errorMessage = '';
+
     if (this.cities.some(city => city.name.toLowerCase() === this.newCityName.toLowerCase())) {
       alert('City has already been added.');
       return;
     }
 
-    const city: City = { name: this.newCityName };
-    this.cityService.saveCity(city).subscribe(
-      savedCity => {
-        console.log('City saved:', savedCity);
-        this.getAllCities();
+    this.weatherService.cityExists(this.newCityName).subscribe(
+      exists => {
+        if (exists) {
+          const city: City = { name: this.newCityName };
+          this.cityService.saveCity(city).subscribe(
+            savedCity => {
+              console.log('City saved:', savedCity);
+              this.getAllCities();
+            },
+            error => {
+              console.error('Error saving city:', error);
+            }
+          );
+        } else {
+          this.errorMessage = 'The city does not exist. Please enter a valid city name.';
+        }
       },
       error => {
-        console.error('Error saving city:', error);
+        console.error('Error validating city name:', error);
+        this.errorMessage = 'There was an error validating the city name. Please try again.';
       }
     );
   }
@@ -81,7 +97,7 @@ export class CityListComponent implements OnInit {
   }
 
   fetchWeatherData(cityName: string): void {
-    this.cityService.getCityWeather(cityName).subscribe(
+    this.weatherService.getWeather(cityName).subscribe(
       data => {
         this.weatherData = data;
       },
