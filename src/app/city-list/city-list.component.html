@@ -13,10 +13,14 @@
     <div class="cities-list">
         <div *ngFor="let city of cities" class="city-card" (click)="selectCity(city)">
             <h2>{{ city.name }}</h2>
+            <button class="delete-button" (click)="deleteCity(city, $event)">Delete</button>
             <div *ngIf="selectedCity && selectedCity.name === city.name && showWeatherData">
                 <div class="weather-data" id="weather-data">
                     <p>Temperature: {{ weatherData?.temp }} °C</p>
                     <p>Weather: {{ weatherData?.weather?.[0]?.description }}</p>
+                    <img *ngIf="weatherData?.weather?.[0]?.icon"
+                        [src]="'http://openweathermap.org/img/wn/' + weatherData?.weather?.[0]?.icon + '@2x.png'"
+                        alt="Weather icon" class="weather-icon">
                     <p>Humidity: {{ weatherData?.humidity }}%</p>
                     <p>Time: {{ currentTime }}</p>
                     <p>Date: {{ currentDate }}</p>

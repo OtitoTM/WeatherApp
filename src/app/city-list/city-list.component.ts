@@ -28,8 +28,7 @@ export class CityListComponent implements OnInit {
   isSaving: boolean = false;
   isRefreshing: boolean = false;
   newCityName: string = '';
-  favoriteCities: City[] = [];
-  weatherData: WeatherData | null = null;
+  weatherData: WeatherData | null = null; // Initialize as null
   weatherHistory: any[] = [];
   currentTime: string = '';
   currentDate: string = '';
@@ -44,7 +43,7 @@ export class CityListComponent implements OnInit {
     private timezoneService: TimezoneService,
     private renderer: Renderer2,
     private snackBar: MatSnackBar
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getAllCities();
@@ -108,19 +107,24 @@ export class CityListComponent implements OnInit {
     );
   }
 
-  deleteCity(id?: number): void {
-    if (id !== undefined) {
-      if (confirm('Are you sure you want to delete this city?')) {
-        this.cityService.deleteCity(id).subscribe(
+  deleteCity(city: City, event: Event): void {
+    event.stopPropagation(); // Prevent triggering city card click
+    if (city.id !== undefined) {
+      if (confirm(`Are you sure you want to delete ${city.name}?`)) {
+        this.cityService.deleteCity(city.id).subscribe(
           () => {
             console.log('City deleted');
             this.getAllCities();
           },
           error => {
             console.error('Error deleting city:', error);
+            this.snackBar.open('Error deleting city. Please try again later.', 'Close', { duration: 3000 });
           }
         );
       }
+    } else {
+      console.error('City ID is undefined');
+      this.snackBar.open('City ID is not available. Please try again later.', 'Close', { duration: 3000 });
     }
   }
 
@@ -152,18 +156,6 @@ export class CityListComponent implements OnInit {
     }
   }
 
-  fetchWeatherData(cityName: string): void {
-    this.weatherService.getWeather(cityName).subscribe(
-      data => {
-        this.weatherData = data;
-        this.saveWeatherHistory(cityName, data);
-      },
-      error => {
-        console.error('Error fetching weather data:', error);
-      }
-    );
-  }
-
   fetchTimeAndDate(cityName: string): void {
     this.timezoneService.getCityTimeAndDate(cityName).subscribe(
       data => {
@@ -176,25 +168,26 @@ export class CityListComponent implements OnInit {
     );
   }
 
-  fetchWeatherHistory(cityName: string): void {
-    this.weatherService.getWeatherHistory(cityName).subscribe(
+fetchWeatherData(cityName: string): void {
+    this.weatherService.getWeather(cityName).subscribe(
       data => {
-        this.weatherHistory = data;
+        this.weatherData = data;
+        this.saveWeatherHistory(cityName, data);
       },
       error => {
-        console.error('Error fetching weather history:', error);
+        console.error('Error fetching weather data:', error);
       }
     );
   }
 
-  saveWeatherHistory(cityName: string, weatherData: WeatherData): void {
+  saveWeatherHistory(cityName: string, weatherData: any): void {
     this.timezoneService.getCityTimeAndDate(cityName).subscribe(
       timeData => {
         const historyEntry = {
           date: timeData.date,
           time: timeData.time,
           temp: weatherData.temp,
-          weather: weatherData.weather && weatherData.weather.length > 0 ? weatherData.weather[0].description : ''
+          weather: weatherData.weather
         };
         this.weatherService.saveWeatherHistory(cityName, historyEntry).subscribe(
           () => {
@@ -208,6 +201,17 @@ export class CityListComponent implements OnInit {
       },
       error => {
         console.error('Error fetching time and date for weather history:', error);
+      }
+    );
+  }
+
+  fetchWeatherHistory(cityName: string): void {
+    this.weatherService.getWeatherHistory(cityName).subscribe(
+      history => {
+        this.weatherHistory = history;
+      },
+      error => {
+        console.error('Error fetching weather history:', error);
       }
     );
   }

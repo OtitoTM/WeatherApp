@@ -1,13 +1,9 @@
-body {
-    background-color: rgb(97, 191, 223);
-    font-family: Arial, sans-serif;
-}
-
 .container {
     max-width: 800px;
     margin: auto;
     padding: 20px;
-    background-color: white;
+    background-color: rgb(97, 191, 223);
+    font-family: Arial, sans-serif;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -78,4 +74,15 @@ body {
 
 .weather-data {
     margin-top: 10px;
+}
+
+.weather-icon {
+    width: 50px;
+    /* Adjust size as needed */
+    height: 50px;
+    /* Adjust size as needed */
+    display: block;
+    /* Ensures the icon is displayed properly */
+    margin-top: 10px;
+    /* Adds space above the icon */
 }

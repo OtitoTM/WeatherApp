@@ -46,7 +46,7 @@ export class WeatherService {
     );
   }
 
-  saveWeatherHistory(cityName: string, historyEntry: { date: string; temp: number; weather: string; }): Observable<any> {
+  saveWeatherHistory(cityName: string, historyEntry: { date: string; time: string; temp: number; weather: string; }): Observable<any> {
     const url = `${this.customApiUrl}/weatherHistory/${cityName}`;
     return this.httpClient.post(url, historyEntry);
   }
