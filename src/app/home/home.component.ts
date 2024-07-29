@@ -17,6 +17,21 @@ import { CityListComponent } from '../city-list/city-list.component';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+deleteCity(arg0: any) {
+throw new Error('Method not implemented.');
+}
+cities: any;
+selectCity(_t18: any) {
+throw new Error('Method not implemented.');
+}
+saveCity() {
+throw new Error('Method not implemented.');
+}
+errorMessage: any;
+newCityName: any;
+getAllCities() {
+throw new Error('Method not implemented.');
+}
   title = 'HomePage';
   city: string = '';
   weatherData: any = {};
@@ -24,6 +39,11 @@ export class HomeComponent implements OnInit {
   isLoadingCurrentLocation = false;
   isLoadingCity = false;
   isCelsius = true;
+currentTime: any;
+selectedCity: any;
+weatherHistory: any;
+currentDate: any;
+showForm: any;
 
   constructor(private weatherService: WeatherService, private conversionService: ConversionService, private CityService: CityService) {}
 
@@ -50,11 +70,11 @@ export class HomeComponent implements OnInit {
   getWeatherByCoordinates(lat: number, lon: number): void {
     this.isLoadingCurrentLocation = true;
     this.weatherService.getWeatherByCoordinates(lat, lon).subscribe(
-      data => {
+      (      data: any) => {
         this.processWeatherData(data);
         this.isLoadingCurrentLocation = false;
       },
-      error => {
+      (      error: any) => {
         console.error('Error fetching weather data:', error);
         this.isLoadingCurrentLocation = false;
       }
@@ -63,7 +83,7 @@ export class HomeComponent implements OnInit {
 
   getForecast(lat: number, lon: number): void {
     this.weatherService.getForecast(lat, lon).subscribe(
-      data => {
+      (      data: any[]) => {
         this.forecastData = data;
       },
       error => {

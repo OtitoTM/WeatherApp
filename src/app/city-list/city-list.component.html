@@ -1,25 +1,29 @@
 <div class="container">
-    <div class="city-form" *ngIf="showForm">
-        <label for="city-name">New City Name:</label>
-        <input id="city-name" class="input-field" type="text" [(ngModel)]="newCityName">
-        <button class="save-button" (click)="saveCity()">Save</button>
+    <div class="header">
+        <h1>List Of Favorite Cities</h1>
+        <button (click)="refreshCities()">Refresh</button>
     </div>
-    <button class="refresh-button" (click)="getAllCities()">Refresh Cities</button>
-    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
-    <div class="city-widget-container">
-        <div class="city-widget" *ngFor="let city of cities" (click)="selectCity(city)">
-            <div class="widget-header">
-                <span class="city-name">{{ city.name }}</span>
-                <button class="delete-button" (click)="deleteCity(city.id)">Delete</button>
-            </div>
-            <div class="widget-body">
-                <div class="widget-temperature" *ngIf="selectedCity?.name === city.name && weatherData">
-                    {{ weatherData.temp }} °C
-                </div>
-                <div *ngIf="selectedCity?.name === city.name && weatherData">
-                    <p>Weather: {{ weatherData.weather }}</p>
-                    <p>Humidity: {{ weatherData.humidity }}%</p>
-                    <img [src]="'http://openweathermap.org/img/w/' + weatherData.icon + '.png'" alt="Weather icon">
+
+    <div class="form-container" *ngIf="showForm">
+        <input [(ngModel)]="newCityName" placeholder="Enter city name">
+        <button (click)="saveCity()" [disabled]="isSaving">Save City</button>
+        <mat-spinner *ngIf="isSaving"></mat-spinner>
+    </div>
+
+    <div class="cities-list">
+        <div *ngFor="let city of cities" class="city-card" (click)="selectCity(city)">
+            <h2>{{ city.name }}</h2>
+            <div *ngIf="selectedCity && selectedCity.name === city.name && showWeatherData">
+                <div class="weather-data" id="weather-data">
+                    <p>Temperature: {{ weatherData?.temp }} °C</p>
+                    <p>Weather: {{ weatherData?.weather?.[0]?.description }}</p>
+                    <p>Humidity: {{ weatherData?.humidity }}%</p>
+                    <p>Time: {{ currentTime }}</p>
+                    <p>Date: {{ currentDate }}</p>
+                    <h3>Weather History for {{ city.name }}</h3>
+                    <div *ngFor="let history of weatherHistory">
+                        <p>{{ history.date }} {{ history.time }}: {{ history.temp }} °C - {{ history.weather }}</p>
+                    </div>
                 </div>
             </div>
         </div>

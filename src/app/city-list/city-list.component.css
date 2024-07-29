@@ -1,148 +1,81 @@
-.container {
-    padding: 0;
-    margin: 20px;
-    background-color: rgb(44, 103, 172);
-    border: none;
-    border-radius: 10px;
-    /* Added for rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* Added for subtle shadow */
+body {
+    background-color: rgb(97, 191, 223);
+    font-family: Arial, sans-serif;
 }
 
-.city-form {
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    padding: 10px;
-    /* Added padding */
-    background-color: #fff;
-    /* White background for the form */
-    border-radius: 10px;
-    /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* Subtle shadow */
 }
 
-.city-form label {
-    margin-right: 10px;
+.header h1 {
+    margin: 0;
 }
 
-.input-field {
-    flex: 2;
-    margin-right: 10px;
-    padding: 10px;
-    /* Added padding for better appearance */
-    border: 1px solid #ccc;
-    /* Border for input field */
-    border-radius: 5px;
-    /* Rounded corners for input field */
-    font-size: 1em;
-    /* Font size for input field */
-}
-
-.save-button,
-.refresh-button {
-    flex: 1;
-    /* Ensures each button takes an equal amount of space */
-    background-color: #007bff;
+.header button {
+    background-color: #1976d2;
     color: white;
     border: none;
-    padding: 10px;
-    /* Adjusted padding */
+    border-radius: 4px;
+    padding: 10px 20px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    margin-left: 10px;
-    /* Space between buttons */
-    border-radius: 5px;
-    /* Rounded corners for buttons */
-    font-size: 1em;
-    /* Font size for buttons */
-    display: inline-block;
-    /* Ensures buttons stay inline */
-    text-align: center;
-    /* Centers text inside buttons */
 }
 
-.save-button:hover,
-.refresh-button:hover {
-    background-color: #0056b3;
+.form-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-.city-widget-container {
+.form-container input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.form-container button {
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.cities-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
 }
 
-.city-widget {
-    background-color: #e0f7fa;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.city-card {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin: 10px;
     padding: 20px;
+    width: 45%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    transition: transform 0.3s, background-color 0.3s;
-    flex: 1 1 calc(33.333% - 20px);
-    min-width: 200px;
+    transition: transform 0.3s ease;
 }
 
-.city-widget:hover {
-    transform: translateY(-5px);
-    background-color: #b2ebf2;
+.city-card:hover {
+    transform: scale(1.05);
 }
 
-.widget-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.city-name {
-    font-size: 1.2em;
-    font-weight: bold;
-}
-
-.delete-button {
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    border-radius: 5px;
-    /* Rounded corners for delete button */
-}
-
-.delete-button:hover {
-    background-color: darkred;
-}
-
-.widget-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.widget-temperature {
-    font-size: 2em;
-    margin-bottom: 10px;
-}
-
-.widget-footer {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.weather-data-section {
-    margin-top: 20px;
-}
-
-.weather-widget {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
+.weather-data {
+    margin-top: 10px;
 }

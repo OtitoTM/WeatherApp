@@ -6,17 +6,16 @@ export interface City {
 }
 
 export interface WeatherData {
-  temp: number;
-  temp_min: number;
-  temp_max: number;
-  feels_like: number;
-  humidity: number;
-  weather: string;
-  icon: string;
+humidity: any;
+  temp: any;
   name: string;
-  coord: {
-    lat: number;
-    lon: number;
+  main: {
+    temp: number;
+    humidity: number;
   };
+  weather: {
+    description: string;
+  }[];
 }
+
 
