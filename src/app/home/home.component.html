@@ -1,20 +1,28 @@
+<!-- home.component.html -->
 <div class="home-container">
-  
   <main>
     <section class="container">
       <div class="row">
         <form class="col" id="search-form">
-          <input type="text" name="cityName" placeholder="Enter a city name" [(ngModel)]="city">
+          <input type="text" name="cityName" placeholder="Enter a city name" [(ngModel)]="city"
+            (input)="fetchCitySuggestions(city)" />
           <button type="button" (click)="getWeather()">Get Weather</button>
           <span *ngIf="isLoadingCity" class="loading-message">Loading...</span>
           <br>
           <button type="button" (click)="toggleTemperatureUnit()">
             Switch to {{ isCelsius ? 'Fahrenheit' : 'Celsius' }}
           </button>
+          <!-- Suggestions List -->
+          <ul *ngIf="citySuggestions.length > 0" class="suggestions-list">
+            <li *ngFor="let suggestion of citySuggestions" (click)="city = suggestion.name; fetchCitySuggestions('')">
+              {{ suggestion.name }}
+            </li>
+          </ul>
         </form>
       </div>
     </section>
 
+    <!-- Weather Widget -->
     <div *ngIf="weatherData.name" class="divWeatherMain">
       <div *ngIf="weatherData.isDay" class="weatherWidgetRow">
         <i class="fa-solid fa-sun sun"></i>
@@ -44,6 +52,7 @@
     </div>
     <hr />
 
+    <!-- Forecast Section -->
     <section class="container">
       <div class="row week-forecast" *ngIf="forecastData.length">
         <div class="col" *ngFor="let day of forecastData">
@@ -56,12 +65,11 @@
       </div>
     </section>
 
-        <footer>
-          <p>
-            Designed and coded by
-            <a href="https://github.com/OtitoTM/WeatherApp.git" target="_blank">OtitoTM</a><span>✌🏼</span>
-          </p>
-        </footer>
-        
+    <footer>
+      <p>
+        Designed and coded by
+        <a href="https://github.com/OtitoTM/WeatherApp.git" target="_blank">OtitoTM</a><span>✌🏼</span>
+      </p>
+    </footer>
   </main>
 </div>

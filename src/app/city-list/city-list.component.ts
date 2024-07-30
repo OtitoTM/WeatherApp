@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CityService } from '../city.service';
 import { WeatherService } from '../services/weather.service';
 import { TimezoneService } from '../timezone.service';
@@ -41,7 +41,6 @@ export class CityListComponent implements OnInit {
     private cityService: CityService,
     private weatherService: WeatherService,
     private timezoneService: TimezoneService,
-    private renderer: Renderer2,
     private snackBar: MatSnackBar
   ) {}
 
@@ -165,6 +164,7 @@ export class CityListComponent implements OnInit {
               this.currentTime = timeData.time;
               this.currentDate = timeData.date;
 
+              // Save weather history
               const historyEntry = {
                 date: this.currentDate,
                 time: this.currentTime,

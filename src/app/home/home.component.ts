@@ -1,3 +1,4 @@
+// home.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -8,6 +9,7 @@ import { DateTimeComponent } from '../date-time/date-time.component';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { CityListComponent } from '../city-list/city-list.component';
 import { CityService } from '../city.service';
+import { City } from '../models/models';
 
 @Component({
   selector: 'app-home',
@@ -32,6 +34,7 @@ export class HomeComponent implements OnInit {
   weatherHistory: any;
   currentDate: any;
   showForm: any;
+  citySuggestions: City[] = []; // Add this to store city suggestions
 
   constructor(private weatherService: WeatherService, private conversionService: ConversionService, private cityService: CityService) {}
 
@@ -113,5 +116,21 @@ export class HomeComponent implements OnInit {
 
   getDisplayedTemperature(temp: number): number {
     return this.isCelsius ? temp : this.conversionService.celsiusToFahrenheit(temp);
+  }
+
+  // Method to fetch city suggestions
+  fetchCitySuggestions(query: string): void {
+    if (query.length > 2) { // Fetch suggestions only if the query length is greater than 2
+      this.cityService.getCitySuggestions(query).subscribe(
+        (suggestions: City[]) => {
+          this.citySuggestions = suggestions;
+        },
+        error => {
+          console.error('Error fetching city suggestions:', error);
+        }
+      );
+    } else {
+      this.citySuggestions = [];
+    }
   }
 }
