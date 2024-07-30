@@ -7,13 +7,13 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class TimezoneService {
-  private apiKey = 'BCU3SZ5244G4';
+  private apiKey = 'BCU3SZ5244G4'; // Replace with your actual API key
   private baseUrl = 'http://api.timezonedb.com/v2.1/get-time-zone';
 
   constructor(private http: HttpClient) {}
 
-  getCityTimeAndDate(city: string): Observable<{ time: string; date: string }> {
-    const url = `${this.baseUrl}?key=${this.apiKey}&format=json&by=zone&zone=${city}`;
+  getCityTimeAndDate(lat: number, lon: number, cityName: string): Observable<{ time: string; date: string }> {
+    const url = `${this.baseUrl}?key=${this.apiKey}&format=json&by=position&lat=${lat}&lng=${lon}`;
     return this.http.get<any>(url).pipe(
       map(data => ({
         time: data.formatted.split(' ')[1],

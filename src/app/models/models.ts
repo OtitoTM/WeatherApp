@@ -6,6 +6,7 @@ export interface City {
 }
 
 export interface WeatherData {
+icon: any;
   temp: number;
   temp_min?: number;
   temp_max?: number;
@@ -21,8 +22,3 @@ export interface WeatherData {
     lon: number;
   };
 }
-
-
-
-
-

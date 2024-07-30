@@ -8,10 +8,9 @@ import { map } from 'rxjs/operators';
 })
 export class WeatherService {
   private apiKey = '1c27a7b13e5a4f069779839f5fc4ceae';
-  private weatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather'; // Current Weather 
-  private forecastApiUrl = 'https://api.openweathermap.org/data/2.5/forecast'; // 5 day / 3 hour forecast
-  private historyApiUrl = 'https://api.weatherapi.com/v1/history.json'; // Historical Weather
-  private customApiUrl = 'your_custom_api_url'; // Your custom API for saving weather history
+  private weatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather';
+  private forecastApiUrl = 'https://api.openweathermap.org/data/2.5/forecast';
+  private customApiUrl = 'http://localhost:3000';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -41,12 +40,13 @@ export class WeatherService {
 
   getWeatherHistory(city: string): Observable<any[]> {
     const url = `${this.customApiUrl}/weatherHistory/${city}`;
-    return this.httpClient.get(url).pipe(
-      map(this.extractData)
-    );
+    return this.httpClient.get(url).pipe(map(this.extractData));
   }
 
-  saveWeatherHistory(cityName: string, historyEntry: { date: string; time: string; temp: number; weather: string; }): Observable<any> {
+  saveWeatherHistory(
+    cityName: string,
+    historyEntry: { date: string; time: string; temp: number; weather: string; }
+  ): Observable<any> {
     const url = `${this.customApiUrl}/weatherHistory/${cityName}`;
     return this.httpClient.post(url, historyEntry);
   }
@@ -100,6 +100,6 @@ export class WeatherService {
       };
     });
 
-    return dailyForecast.slice(0, 7); // Return only the first 7 days
+    return dailyForecast.slice(0, 7);
   }
 }

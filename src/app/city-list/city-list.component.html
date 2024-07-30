@@ -1,31 +1,35 @@
 <div class="container">
     <div class="header">
         <h1>List Of Favorite Cities</h1>
-        <button (click)="refreshCities()">Refresh</button>
+        <button (click)="refreshCities()" class="refresh-button">Refresh</button>
     </div>
-
     <div class="form-container" *ngIf="showForm">
-        <input [(ngModel)]="newCityName" placeholder="Enter city name">
-        <button (click)="saveCity()" [disabled]="isSaving">Save City</button>
+        <input [(ngModel)]="newCityName" placeholder="Enter city name" class="city-input">
+        <button (click)="saveCity()" [disabled]="isSaving" class="save-button">Save City</button>
         <mat-spinner *ngIf="isSaving"></mat-spinner>
     </div>
-
     <div class="cities-list">
         <div *ngFor="let city of cities" class="city-card" (click)="selectCity(city)">
-            <h2>{{ city.name }}</h2>
-            <button class="delete-button" (click)="deleteCity(city, $event)">Delete</button>
+            <div class="city-header">
+                <h2>{{ city.name }}</h2>
+                <button class="delete-button" (click)="deleteCity(city, $event)">Delete</button>
+            </div>
             <div *ngIf="selectedCity && selectedCity.name === city.name && showWeatherData">
                 <div class="weather-data" id="weather-data">
-                    <p>Temperature: {{ weatherData?.temp }} °C</p>
-                    <p>Weather: {{ weatherData?.weather?.[0]?.description }}</p>
-                    <img *ngIf="weatherData?.weather?.[0]?.icon"
-                        [src]="'http://openweathermap.org/img/wn/' + weatherData?.weather?.[0]?.icon + '@2x.png'"
-                        alt="Weather icon" class="weather-icon">
-                    <p>Humidity: {{ weatherData?.humidity }}%</p>
-                    <p>Time: {{ currentTime }}</p>
-                    <p>Date: {{ currentDate }}</p>
+                    <div class="weather-icon-container">
+                        <img *ngIf="weatherData?.weather?.[0]?.icon"
+                            [src]="'http://openweathermap.org/img/wn/' + weatherData?.weather?.[0]?.icon + '@2x.png'"
+                            alt="Weather icon" class="weather-icon">
+                    </div>
+                    <div class="weather-info">
+                        <p class="temperature">{{ weatherData?.temp }} °C</p>
+                        <p class="description">{{ weatherData?.weather?.[0]?.description }}</p>
+                        <p class="additional-info">Humidity: {{ weatherData?.humidity }}%</p>
+                        <p class="additional-info">Time: {{ currentTime }}</p>
+                        <p class="additional-info">Date: {{ currentDate }}</p>
+                    </div>
                     <h3>Weather History for {{ city.name }}</h3>
-                    <div *ngFor="let history of weatherHistory">
+                    <div *ngFor="let history of weatherHistory" class="history-item">
                         <p>{{ history.date }} {{ history.time }}: {{ history.temp }} °C - {{ history.weather }}</p>
                     </div>
                 </div>

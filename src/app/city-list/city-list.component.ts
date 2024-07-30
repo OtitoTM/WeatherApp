@@ -28,7 +28,7 @@ export class CityListComponent implements OnInit {
   isSaving: boolean = false;
   isRefreshing: boolean = false;
   newCityName: string = '';
-  weatherData: WeatherData | null = null; // Initialize as null
+  weatherData: WeatherData | null = null;
   weatherHistory: any[] = [];
   currentTime: string = '';
   currentDate: string = '';
@@ -136,7 +136,6 @@ export class CityListComponent implements OnInit {
         this.selectedCity = city;
         this.showWeatherData = true;
         this.fetchWeatherData(city.name);
-        this.fetchTimeAndDate(city.name);
         this.fetchWeatherHistory(city.name);
         setTimeout(() => this.scrollToWeatherData(), 100);
       }, 300); // Single click threshold
@@ -149,58 +148,52 @@ export class CityListComponent implements OnInit {
         this.selectedCity = city;
         this.showWeatherData = true;
         this.fetchWeatherData(city.name);
-        this.fetchTimeAndDate(city.name);
         this.fetchWeatherHistory(city.name);
         setTimeout(() => this.scrollToWeatherData(), 100);
       }
     }
   }
 
-  fetchTimeAndDate(cityName: string): void {
-    this.timezoneService.getCityTimeAndDate(cityName).subscribe(
-      data => {
-        this.currentTime = data.time;
-        this.currentDate = data.date;
-      },
-      error => {
-        console.error('Error fetching time and date:', error);
-      }
-    );
-  }
-
-fetchWeatherData(cityName: string): void {
+  fetchWeatherData(cityName: string): void {
+    this.isLoading = true;
     this.weatherService.getWeather(cityName).subscribe(
       data => {
         this.weatherData = data;
-        this.saveWeatherHistory(cityName, data);
+        if (data && data.coord) {
+          this.timezoneService.getCityTimeAndDate(data.coord.lat, data.coord.lon, cityName).subscribe(
+            timeData => {
+              this.currentTime = timeData.time;
+              this.currentDate = timeData.date;
+
+              const historyEntry = {
+                date: this.currentDate,
+                time: this.currentTime,
+                temp: this.weatherData!.temp,
+                weather: Array.isArray(this.weatherData!.weather)
+                  ? this.weatherData!.weather.map(w => `${w.description} (${w.icon})`).join(', ')
+                  : '',
+              };
+
+              this.weatherService.saveWeatherHistory(cityName, historyEntry).subscribe(
+                () => {
+                  console.log('Weather history saved');
+                  this.fetchWeatherHistory(cityName);
+                },
+                error => {
+                  console.error('Error saving weather history:', error);
+                }
+              );
+            },
+            error => {
+              console.error('Error fetching time and date:', error);
+            }
+          );
+        }
+        this.isLoading = false;
       },
       error => {
         console.error('Error fetching weather data:', error);
-      }
-    );
-  }
-
-  saveWeatherHistory(cityName: string, weatherData: any): void {
-    this.timezoneService.getCityTimeAndDate(cityName).subscribe(
-      timeData => {
-        const historyEntry = {
-          date: timeData.date,
-          time: timeData.time,
-          temp: weatherData.temp,
-          weather: weatherData.weather
-        };
-        this.weatherService.saveWeatherHistory(cityName, historyEntry).subscribe(
-          () => {
-            console.log('Weather history saved');
-            this.fetchWeatherHistory(cityName);
-          },
-          error => {
-            console.error('Error saving weather history:', error);
-          }
-        );
-      },
-      error => {
-        console.error('Error fetching time and date for weather history:', error);
+        this.isLoading = false;
       }
     );
   }

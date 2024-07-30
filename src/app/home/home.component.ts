@@ -1,4 +1,3 @@
-import { CityService } from './../city.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -7,7 +6,8 @@ import { WeatherService } from '../services/weather.service';
 import { ConversionService } from '../conversion.service';
 import { DateTimeComponent } from '../date-time/date-time.component';
 import { SpinnerComponent } from '../spinner/spinner.component';
-import { CityListComponent } from '../city-list/city-list.component'; 
+import { CityListComponent } from '../city-list/city-list.component';
+import { CityService } from '../city.service';
 
 @Component({
   selector: 'app-home',
@@ -17,21 +17,9 @@ import { CityListComponent } from '../city-list/city-list.component';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-deleteCity(arg0: any) {
-throw new Error('Method not implemented.');
-}
-cities: any;
-selectCity(_t18: any) {
-throw new Error('Method not implemented.');
-}
-saveCity() {
-throw new Error('Method not implemented.');
-}
-errorMessage: any;
-newCityName: any;
-getAllCities() {
-throw new Error('Method not implemented.');
-}
+  cities: any;
+  errorMessage: any;
+  newCityName: any;
   title = 'HomePage';
   city: string = '';
   weatherData: any = {};
@@ -39,13 +27,13 @@ throw new Error('Method not implemented.');
   isLoadingCurrentLocation = false;
   isLoadingCity = false;
   isCelsius = true;
-currentTime: any;
-selectedCity: any;
-weatherHistory: any;
-currentDate: any;
-showForm: any;
+  currentTime: any;
+  selectedCity: any;
+  weatherHistory: any;
+  currentDate: any;
+  showForm: any;
 
-  constructor(private weatherService: WeatherService, private conversionService: ConversionService, private CityService: CityService) {}
+  constructor(private weatherService: WeatherService, private conversionService: ConversionService, private cityService: CityService) {}
 
   ngOnInit(): void {
     this.getCurrentLocationWeather();
@@ -70,11 +58,11 @@ showForm: any;
   getWeatherByCoordinates(lat: number, lon: number): void {
     this.isLoadingCurrentLocation = true;
     this.weatherService.getWeatherByCoordinates(lat, lon).subscribe(
-      (      data: any) => {
+      data => {
         this.processWeatherData(data);
         this.isLoadingCurrentLocation = false;
       },
-      (      error: any) => {
+      error => {
         console.error('Error fetching weather data:', error);
         this.isLoadingCurrentLocation = false;
       }
@@ -83,10 +71,10 @@ showForm: any;
 
   getForecast(lat: number, lon: number): void {
     this.weatherService.getForecast(lat, lon).subscribe(
-      (      data: any[]) => {
+      (data: any[]) => {
         this.forecastData = data;
       },
-      error => {
+      (error: any) => {
         console.error('Error fetching forecast data:', error);
       }
     );
