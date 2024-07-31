@@ -1,3 +1,5 @@
+// weather.service.ts
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -10,7 +12,7 @@ export class WeatherService {
   private apiKey = '1c27a7b13e5a4f069779839f5fc4ceae';
   private weatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather';
   private forecastApiUrl = 'https://api.openweathermap.org/data/2.5/forecast';
-  private customApiUrl = 'http://localhost:3000';
+  private customApiUrl = 'http://localhost:8081/api/weatherHistory';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -39,15 +41,15 @@ export class WeatherService {
   }
 
   getWeatherHistory(city: string): Observable<any[]> {
-    const url = `${this.customApiUrl}/weatherHistory/${city}`;
-    return this.httpClient.get(url).pipe(map(this.extractData));
+    const url = `${this.customApiUrl}/${city}`;
+    return this.httpClient.get<any[]>(url).pipe(map(this.extractData));
   }
 
   saveWeatherHistory(
     cityName: string,
     historyEntry: { date: string; time: string; temp: number; weather: string; }
   ): Observable<any> {
-    const url = `${this.customApiUrl}/weatherHistory/${cityName}`;
+    const url = `${this.customApiUrl}/${cityName}`;
     return this.httpClient.post(url, historyEntry);
   }
 

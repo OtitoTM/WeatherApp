@@ -1,6 +1,5 @@
 package weatherHistory.weatherApp.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import weatherHistory.weatherApp.model.WeatherHistory;
@@ -19,8 +18,10 @@ public class WeatherHistoryController {
     this.weatherHistoryService = weatherHistoryService;
   }
 
-  @PostMapping
-  public WeatherHistory saveWeatherHistory(@RequestBody WeatherHistory weatherHistory) {
+  @PostMapping("/{cityName}")
+  public WeatherHistory saveWeatherHistory(
+    @PathVariable String cityName,
+    @RequestBody WeatherHistory weatherHistory) {
     return weatherHistoryService.saveWeatherHistory(weatherHistory);
   }
 
@@ -29,4 +30,3 @@ public class WeatherHistoryController {
     return weatherHistoryService.getWeatherHistoryByCityName(cityName);
   }
 }
-
