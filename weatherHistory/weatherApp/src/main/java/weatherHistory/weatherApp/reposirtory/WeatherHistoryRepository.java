@@ -7,8 +7,9 @@ import weatherHistory.weatherApp.model.WeatherHistory;
 
 import java.util.List;
 
-  @Repository
-  public interface WeatherHistoryRepository extends JpaRepository<WeatherHistory, Long> {
-    List<WeatherHistory> findByCityName(String cityName);
-  }
+@Repository
+public interface WeatherHistoryRepository extends JpaRepository<WeatherHistory, Long> {
+  List<WeatherHistory> findByCityName(String cityName);
+}
+
 

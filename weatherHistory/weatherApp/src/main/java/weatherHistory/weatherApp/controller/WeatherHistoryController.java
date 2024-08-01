@@ -1,6 +1,8 @@
 package weatherHistory.weatherApp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import weatherHistory.weatherApp.model.WeatherHistory;
 import weatherHistory.weatherApp.service.WeatherHistory.WeatherHistoryService;
@@ -22,6 +24,8 @@ public class WeatherHistoryController {
   public WeatherHistory saveWeatherHistory(
     @PathVariable String cityName,
     @RequestBody WeatherHistory weatherHistory) {
+    // Ensure city name is set correctly in the weather history
+    weatherHistory.setCityName(cityName);
     return weatherHistoryService.saveWeatherHistory(weatherHistory);
   }
 

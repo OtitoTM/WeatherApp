@@ -4,11 +4,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #86b5e4;
+    background:  linear-gradient(rgba(11,40,119,0.6),rgba(206,101,101,0.322)),url(../../images/glass-window-1845534_640.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
     padding: 20px;
     border-radius: 10px;
-    /* width: 90vw;
-    max-width: 1200px; */
 }
 
 .header {
@@ -21,7 +21,8 @@
 
 .header h1 {
     font-size: 24px;
-    color: #333;
+    font-weight: 500;
+    color: #110606;
 }
 
 .refresh-button {
@@ -68,7 +69,7 @@
 }
 
 .city-card {
-    background-color: #fff;
+    background-color: #ffffffd7;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 15px;

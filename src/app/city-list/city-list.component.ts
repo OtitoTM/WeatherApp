@@ -78,7 +78,7 @@ export class CityListComponent implements OnInit {
     }
 
     this.weatherService.cityExists(this.newCityName).subscribe(
-      exists => {
+      (      exists: any) => {
         if (exists) {
           const city: City = { name: this.newCityName };
           this.cityService.saveCity(city).subscribe(
@@ -98,7 +98,7 @@ export class CityListComponent implements OnInit {
           this.isSaving = false;
         }
       },
-      error => {
+      (      error: any) => {
         console.error('Error validating city name:', error);
         this.snackBar.open('There was an error validating the city name. Please try again.', 'Close', { duration: 3000 });
         this.isSaving = false;

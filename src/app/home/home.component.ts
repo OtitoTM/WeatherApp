@@ -1,4 +1,3 @@
-// home.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -61,11 +60,11 @@ export class HomeComponent implements OnInit {
   getWeatherByCoordinates(lat: number, lon: number): void {
     this.isLoadingCurrentLocation = true;
     this.weatherService.getWeatherByCoordinates(lat, lon).subscribe(
-      data => {
+      (      data: any) => {
         this.processWeatherData(data);
         this.isLoadingCurrentLocation = false;
       },
-      error => {
+      (      error: any) => {
         console.error('Error fetching weather data:', error);
         this.isLoadingCurrentLocation = false;
       }
