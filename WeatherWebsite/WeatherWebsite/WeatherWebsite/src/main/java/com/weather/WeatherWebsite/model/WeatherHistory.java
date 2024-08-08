@@ -1,9 +1,9 @@
 package com.weather.WeatherWebsite.model;
 
-
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "weather_history")
@@ -16,17 +16,23 @@ public class WeatherHistory {
   @Column(name = "city_name", nullable = false)
   private String cityName;
 
-  @Column(name = "date", nullable = false)
-  private LocalDate date;
-
-  @Column(name = "time", nullable = false)
-  private String time;
-
-  @Column(name = "temperature", nullable = false)
+  @Column(name = "temperature")
   private double temperature;
 
-  @Column(name = "weather_description", nullable = false)
+  @Column(name = "weather_description")
   private String weatherDescription;
+
+  @Column(name = "weather_icon")
+  private String weatherIcon;
+
+  @Column(name = "search_time", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+  private LocalDateTime searchTime;
+
+  @Column(name = "favorite_city_id")
+  private Integer favoriteCityId;
+
+  @Column(name = "time", nullable = false)
+  private String time = LocalTime.now().toString();
 
   // Getters and Setters
 
@@ -46,22 +52,6 @@ public class WeatherHistory {
     this.cityName = cityName;
   }
 
-  public LocalDate getDate() {
-    return date;
-  }
-
-  public void setDate(LocalDate date) {
-    this.date = date;
-  }
-
-  public String getTime() {
-    return time;
-  }
-
-  public void setTime(String time) {
-    this.time = time;
-  }
-
   public double getTemperature() {
     return temperature;
   }
@@ -77,5 +67,36 @@ public class WeatherHistory {
   public void setWeatherDescription(String weatherDescription) {
     this.weatherDescription = weatherDescription;
   }
-}
 
+  public String getWeatherIcon() {
+    return weatherIcon;
+  }
+
+  public void setWeatherIcon(String weatherIcon) {
+    this.weatherIcon = weatherIcon;
+  }
+
+  public LocalDateTime getSearchTime() {
+    return searchTime;
+  }
+
+  public void setSearchTime(LocalDateTime searchTime) {
+    this.searchTime = searchTime;
+  }
+
+  public Integer getFavoriteCityId() {
+    return favoriteCityId;
+  }
+
+  public void setFavoriteCityId(Integer favoriteCityId) {
+    this.favoriteCityId = favoriteCityId;
+  }
+
+  public String getTime() {
+    return time;
+  }
+
+  public void setTime(String time) {
+    this.time = time;
+  }
+}

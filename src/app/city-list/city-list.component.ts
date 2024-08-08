@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CityService } from '../city.service';
 import { WeatherService } from '../services/weather.service';
+import { WeatherHistoryService } from '../weather-history.service';
 import { TimezoneService } from '../timezone.service';
 import { City, WeatherData } from '../models/models';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
+import { WeatherHistoryComponent } from '../weather-history/weather-history.component'; // Import the new component
+import { WeatherHistory } from '../models/weather-history';
 
 @Component({
   selector: 'app-city-list',
@@ -15,7 +19,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     CommonModule,
     FormsModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIconModule, WeatherHistoryComponent // Add the new component here
   ],
   templateUrl: './city-list.component.html',
   styleUrls: ['./city-list.component.css']
@@ -29,7 +34,7 @@ export class CityListComponent implements OnInit {
   isRefreshing: boolean = false;
   newCityName: string = '';
   weatherData: WeatherData | null = null;
-  weatherHistory: any[] = [];
+  weatherHistory: WeatherHistory[] = [];
   currentTime: string = '';
   currentDate: string = '';
   errorMessage: string = '';
@@ -40,6 +45,7 @@ export class CityListComponent implements OnInit {
   constructor(
     private cityService: CityService,
     private weatherService: WeatherService,
+    private weatherHistoryService: WeatherHistoryService,
     private timezoneService: TimezoneService,
     private snackBar: MatSnackBar
   ) {}
@@ -78,7 +84,7 @@ export class CityListComponent implements OnInit {
     }
 
     this.weatherService.cityExists(this.newCityName).subscribe(
-      (      exists: any) => {
+      exists => {
         if (exists) {
           const city: City = { name: this.newCityName };
           this.cityService.saveCity(city).subscribe(
@@ -98,7 +104,7 @@ export class CityListComponent implements OnInit {
           this.isSaving = false;
         }
       },
-      (      error: any) => {
+      error => {
         console.error('Error validating city name:', error);
         this.snackBar.open('There was an error validating the city name. Please try again.', 'Close', { duration: 3000 });
         this.isSaving = false;
@@ -107,7 +113,7 @@ export class CityListComponent implements OnInit {
   }
 
   deleteCity(city: City, event: Event): void {
-    event.stopPropagation(); // Prevent triggering city card click
+    event.stopPropagation();
     if (city.id !== undefined) {
       if (confirm(`Are you sure you want to delete ${city.name}?`)) {
         this.cityService.deleteCity(city.id).subscribe(
@@ -137,7 +143,7 @@ export class CityListComponent implements OnInit {
         this.fetchWeatherData(city.name);
         this.fetchWeatherHistory(city.name);
         setTimeout(() => this.scrollToWeatherData(), 100);
-      }, 300); // Single click threshold
+      }, 300);
     } else if (this.clickCount === 2) {
       clearTimeout(this.clickTimeout);
       this.clickCount = 0;
@@ -158,50 +164,63 @@ export class CityListComponent implements OnInit {
     this.weatherService.getWeather(cityName).subscribe(
       data => {
         this.weatherData = data;
-        if (data && data.coord) {
-          this.timezoneService.getCityTimeAndDate(data.coord.lat, data.coord.lon, cityName).subscribe(
-            timeData => {
-              this.currentTime = timeData.time;
-              this.currentDate = timeData.date;
-
-              // Save weather history
-              const historyEntry = {
-                date: this.currentDate,
-                time: this.currentTime,
-                temp: this.weatherData!.temp,
-                weather: Array.isArray(this.weatherData!.weather)
-                  ? this.weatherData!.weather.map(w => `${w.description} (${w.icon})`).join(', ')
-                  : '',
-              };
-
-              this.weatherService.saveWeatherHistory(cityName, historyEntry).subscribe(
-                () => {
-                  console.log('Weather history saved');
-                  this.fetchWeatherHistory(cityName);
-                },
-                error => {
-                  console.error('Error saving weather history:', error);
-                }
-              );
-            },
-            error => {
-              console.error('Error fetching time and date:', error);
-            }
-          );
-        }
         this.isLoading = false;
+        this.fetchCityTimeAndDate(cityName);
+        this.saveWeatherHistory(cityName);
       },
       error => {
         console.error('Error fetching weather data:', error);
         this.isLoading = false;
+        this.snackBar.open('Error fetching weather data. Please try again later.', 'Close', { duration: 3000 });
       }
     );
   }
 
+  fetchCityTimeAndDate(cityName: string): void {
+    if (this.weatherData?.latitude !== undefined && this.weatherData?.longitude !== undefined) {
+      this.timezoneService.getCityTimeAndDate(this.weatherData.latitude, this.weatherData.longitude, cityName).subscribe(
+        data => {
+          this.currentTime = data.time;
+          this.currentDate = data.date;
+        },
+        error => {
+          console.error('Error fetching time and date:', error);
+        }
+      );
+    }
+  }
+
+  saveWeatherHistory(cityName: string): void {
+    if (this.weatherData) {
+      const weatherHistory: WeatherHistory = {
+        cityName: cityName,
+        temperature: this.weatherData.temperature,
+        weatherDescription: this.weatherData.description,
+        weatherIcon: this.weatherData.icon ?? '',
+        searchTime: new Date().toISOString()
+      };
+
+      this.weatherHistoryService.saveWeatherHistory(cityName, weatherHistory).subscribe(
+        () => {
+          console.log('Weather history saved');
+          this.fetchWeatherHistory(cityName);
+        },
+        error => {
+          console.error('Error saving weather history:', error);
+        }
+      );
+    }
+  }
+
   fetchWeatherHistory(cityName: string): void {
-    this.weatherService.getWeatherHistory(cityName).subscribe(
+    this.weatherHistoryService.getWeatherHistory(cityName).subscribe(
       history => {
-        this.weatherHistory = history;
+        this.weatherHistory = history.map((entry: any) => ({
+          date: entry.searchTime,
+          temperature: entry.temperature,
+          weatherDescription: entry.weatherDescription,
+          icon: entry.weatherIcon
+        }));
       },
       error => {
         console.error('Error fetching weather history:', error);
@@ -210,13 +229,9 @@ export class CityListComponent implements OnInit {
   }
 
   scrollToWeatherData(): void {
-    const element = document.getElementById('weather-data');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    const weatherDataElement = document.getElementById('weather-data');
+    if (weatherDataElement) {
+      weatherDataElement.scrollIntoView({ behavior: 'smooth' });
     }
-  }
-
-  refreshCities(): void {
-    this.getAllCities();
   }
 }

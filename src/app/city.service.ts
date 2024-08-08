@@ -1,4 +1,3 @@
-// city.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -10,8 +9,7 @@ import { WeatherService } from './services/weather.service';
 })
 export class CityService {
   private apiUrl = 'http://localhost:8080/api/cities';
-  private autocompleteUrl = 'http://localhost:8080/api/cities/autocomplete'; // Add this URL
-  cityExists: any;
+  private autocompleteUrl = 'http://localhost:8080/api/cities/autocomplete';
 
   constructor(private http: HttpClient, private weatherService: WeatherService) {}
 
@@ -31,11 +29,10 @@ export class CityService {
     return this.weatherService.getWeather(cityName);
   }
 
-  getCityWeatherHistory(id: number): Observable<WeatherData[]> {
-    return this.http.get<WeatherData[]>(`${this.apiUrl}/${id}/weather/history`);
+  getCityWeatherHistory(cityName: string): Observable<WeatherData[]> {
+    return this.weatherService.getWeatherHistory(cityName);
   }
 
-  // Method to fetch city suggestions
   getCitySuggestions(query: string): Observable<City[]> {
     return this.http.get<City[]>(`${this.autocompleteUrl}?query=${query}`);
   }

@@ -6,7 +6,11 @@ export interface City {
 }
 
 export interface WeatherData {
-icon: any;
+  description: any;
+  temperature: any;
+  icon: any;
+  latitude: number; // Add this line
+  longitude: number; 
   temp: number;
   temp_min?: number;
   temp_max?: number;
@@ -21,4 +25,6 @@ icon: any;
     lat: number;
     lon: number;
   };
+
+  
 }

@@ -1,39 +1,42 @@
-<div class="container">
-    <div class="header">
-        <h1>List Of Favorite Cities</h1>
-        <button (click)="refreshCities()" class="refresh-button">Refresh</button>
+<div class="city-list">
+    <h2>Favorite Cities</h2>
+    <div class="city" *ngFor="let city of cities" (click)="selectCity(city)">
+        <span>{{ city.name }}</span>
+        <button mat-icon-button (click)="deleteCity(city, $event)">
+            <mat-icon>delete</mat-icon>
+        </button>
     </div>
-    <div class="form-container" *ngIf="showForm">
-        <input [(ngModel)]="newCityName" placeholder="Enter city name" class="city-input">
-        <button (click)="saveCity()" [disabled]="isSaving" class="save-button">Save City</button>
-        <mat-spinner *ngIf="isSaving"></mat-spinner>
+
+    <form (ngSubmit)="saveCity()">
+        <input type="text" [(ngModel)]="newCityName" name="cityName" placeholder="Enter city name" required>
+        <button type="submit" mat-raised-button color="primary" [disabled]="isSaving">
+            <span *ngIf="isSaving">
+                <mat-spinner diameter="20"></mat-spinner>
+            </span>
+            <span *ngIf="!isSaving">Save</span>
+        </button>
+    </form>
+
+    <div *ngIf="showWeatherData && weatherData" id="weather-data">
+        <h3>Weather for {{ selectedCity?.name }}</h3>
+        <p>Temperature: {{ weatherData.temperature }}°C</p>
+        <p>Description: {{ weatherData.description }}</p>
+        <img [src]="weatherData.icon" alt="Weather Icon">
+        <p>Current Time: {{ currentTime }}</p>
+        <p>Current Date: {{ currentDate }}</p>
     </div>
-    <div class="cities-list">
-        <div *ngFor="let city of cities" class="city-card" (click)="selectCity(city)">
-            <div class="city-header">
-                <h2>{{ city.name }}</h2>
-                <button class="delete-button" (click)="deleteCity(city, $event)">Delete</button>
-            </div>
-            <div *ngIf="selectedCity && selectedCity.name === city.name && showWeatherData">
-                <div class="weather-data" id="weather-data">
-                    <div class="weather-icon-container">
-                        <img *ngIf="weatherData?.weather?.[0]?.icon"
-                            [src]="'http://openweathermap.org/img/wn/' + weatherData?.weather?.[0]?.icon + '@2x.png'"
-                            alt="Weather icon" class="weather-icon">
-                    </div>
-                    <div class="weather-info">
-                        <p class="temperature">{{ weatherData?.temp }} °C</p>
-                        <p class="description">{{ weatherData?.weather?.[0]?.description }}</p>
-                        <p class="additional-info">Humidity: {{ weatherData?.humidity }}%</p>
-                        <p class="additional-info">Time: {{ currentTime }}</p>
-                        <p class="additional-info">Date: {{ currentDate }}</p>
-                    </div>
-                    <h3>Weather History for {{ city.name }}</h3>
-                    <div *ngFor="let history of weatherHistory" class="history-item">
-                        <p>{{ history.date }} {{ history.time }}: {{ history.temp }} °C - {{ history.weather }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+    <div *ngIf="weatherHistory.length > 0">
+        <h4>Weather History</h4>
+        <ul>
+            <li *ngFor="let history of weatherHistory">
+                <p>Temperature: {{ history.temperature }}°C</p>
+                <p>Description: {{ history.weatherDescription }}</p>
+                <img [src]="history.icon" alt="Weather Icon">
+                <p>Search Time: {{ history.searchTime | date: 'short' }}</p>
+            </li>
+        </ul>
     </div>
+
+    <mat-spinner *ngIf="isRefreshing"></mat-spinner>
 </div>

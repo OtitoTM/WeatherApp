@@ -1,0 +1,10 @@
+<div *ngIf="weatherHistory.length > 0" class="weather-history">
+    <h3>Weather History</h3>
+    <ul>
+        <li *ngFor="let history of weatherHistory">
+            <img [src]="history.icon" alt="{{ history.weatherDescription }}" />
+            <span>{{ history.date | date: 'short' }} - {{ history.temperature }}°C, {{ history.weatherDescription
+                }}</span>
+        </li>
+    </ul>
+</div>
