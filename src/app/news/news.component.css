@@ -2,10 +2,13 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+   
 }
 
 .container {
+    background: linear-gradient(rgba(11, 40, 119, 0.6), rgba(206, 101, 101, 0.322)), url(../../images/glass-window-1845534_640.jpg);
+    background-position: center;
+    background-size: cover;
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
@@ -18,7 +21,7 @@ body {
 
 .post {
     flex: 1;
-    background: #fff;
+    background: #ffffff73;
     margin: 10px;
     padding: 20px;
     border-radius: 8px;

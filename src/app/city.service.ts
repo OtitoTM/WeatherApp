@@ -11,6 +11,7 @@ import { WeatherService } from './services/weather.service';
 export class CityService {
   private apiUrl = 'http://localhost:8080/api/cities';
   private autocompleteUrl = 'http://localhost:8080/api/cities/autocomplete'; // Add this URL
+  cityExists: any;
 
   constructor(private http: HttpClient, private weatherService: WeatherService) {}
 

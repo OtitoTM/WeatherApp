@@ -1,14 +1,16 @@
 /* Global Styles */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+    color: #33333354;
     margin: 0;
     padding: 0;
 }
 
 /* Container */
 .container {
+    background: linear-gradient(rgba(11, 40, 119, 0.6), rgba(206, 101, 101, 0.322)), url(../../images/glass-window-1845534_640.jpg);
+    background-position: center;
+    background-size: cover;
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
@@ -21,7 +23,7 @@ body {
 
 /* Contact Details */
 .contact-details {
-    background-color: #f8f8f8;
+    background-color: #f8f8f89c;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);

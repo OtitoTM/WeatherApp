@@ -10,7 +10,7 @@ export class WeatherService {
   private apiKey = '1c27a7b13e5a4f069779839f5fc4ceae';
   private weatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather';
   private forecastApiUrl = 'https://api.openweathermap.org/data/2.5/forecast';
-  private customApiUrl = 'http://localhost:8081/api/weatherHistory';
+  private customApiUrl = 'http://127.0.0.1:3306/api/weatherHistory';
 
   constructor(private httpClient: HttpClient) {}
 

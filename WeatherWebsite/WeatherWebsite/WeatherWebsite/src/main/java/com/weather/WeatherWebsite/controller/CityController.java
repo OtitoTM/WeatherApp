@@ -1,7 +1,7 @@
 package com.weather.WeatherWebsite.controller;
 
-import com.weather.WeatherWebsite.model.City;
 import com.weather.WeatherWebsite.model.WeatherData;
+import com.weather.WeatherWebsite.model.City;
 import com.weather.WeatherWebsite.repository.CityRepository;
 import com.weather.WeatherWebsite.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class CityController {
   private WeatherService weatherService;
 
   @PostMapping
-  public ResponseEntity<City> saveCity(@RequestBody City city) {
+  public ResponseEntity<Object> saveCity(@RequestBody City city) {
     City savedCity = cityRepository.save(city);
     return ResponseEntity.ok(savedCity);
   }
