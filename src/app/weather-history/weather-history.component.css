@@ -1,0 +1,62 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(rgba(11, 40, 119, 0.6), rgba(206, 101, 101, 0.322)), url(../../images/glass-window-1845534_640.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 24px;
+    font-weight: 500;
+    color: #110606;
+}
+
+.history-item {
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.weather-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.weather-icon-container {
+    align-self: center;
+}
+
+.weather-icon {
+    width: 50px;
+    height: 50px;
+}
+
+.temperature {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.description {
+    font-size: 18px;
+    color: #666;
+}
+
+.additional-info {
+    font-size: 14px;
+    color: #999;
+}

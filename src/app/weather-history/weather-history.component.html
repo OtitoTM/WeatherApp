@@ -1,10 +1,14 @@
-<div *ngIf="weatherHistory.length > 0" class="weather-history">
-    <h3>Weather History</h3>
-    <ul>
-        <li *ngFor="let history of weatherHistory">
-            <img [src]="history.icon" alt="{{ history.weatherDescription }}" />
-            <span>{{ history.date | date: 'short' }} - {{ history.temperature }}°C, {{ history.weatherDescription
-                }}</span>
-        </li>
-    </ul>
+<div class="weather-history-container">
+  <h3>Weather History</h3>
+  <ul>
+    <li *ngFor="let history of weatherHistory">
+      <div>
+        <span>{{ history.date }}</span>
+        <span>{{ history.weatherDescription }}</span>
+        <span>{{ history.temperature }}°C</span>
+        <img *ngIf="history.weatherIcon" [src]="history.weatherIcon" alt="Weather Icon" />
+        <span>{{ history.searchTime }}</span>
+      </div>
+    </li>
+  </ul>
 </div>

@@ -1,42 +1,58 @@
-<div class="city-list">
-    <h2>Favorite Cities</h2>
-    <div class="city" *ngFor="let city of cities" (click)="selectCity(city)">
-        <span>{{ city.name }}</span>
-        <button mat-icon-button (click)="deleteCity(city, $event)">
-            <mat-icon>delete</mat-icon>
+<div class="container">
+    <div class="header">
+        <h1>City List</h1>
+        <button (click)="showForm = !showForm">
+            {{ showForm ? 'Hide' : 'Add New City' }}
         </button>
     </div>
 
-    <form (ngSubmit)="saveCity()">
-        <input type="text" [(ngModel)]="newCityName" name="cityName" placeholder="Enter city name" required>
-        <button type="submit" mat-raised-button color="primary" [disabled]="isSaving">
-            <span *ngIf="isSaving">
-                <mat-spinner diameter="20"></mat-spinner>
-            </span>
-            <span *ngIf="!isSaving">Save</span>
+    <div *ngIf="showForm" class="add-city-form">
+        <input type="text" [(ngModel)]="newCityName" placeholder="Enter city name" aria-label="Enter city name" />
+        <button (click)="saveCity()" [disabled]="isSaving">
+            <mat-spinner *ngIf="isSaving" diameter="20"></mat-spinner>
+            <span *ngIf="!isSaving">Save City</span>
         </button>
-    </form>
+    </div>
 
-    <div *ngIf="showWeatherData && weatherData" id="weather-data">
-        <h3>Weather for {{ selectedCity?.name }}</h3>
+    <div *ngIf="isRefreshing" class="loading-spinner">
+        <mat-spinner diameter="50"></mat-spinner>
+    </div>
+
+    <div *ngIf="!isRefreshing && cities.length > 0">
+        <div *ngFor="let city of paginatedCities" (click)="selectCity(city)" class="city-card">
+            <h3>{{ city.name }}</h3>
+            <button (click)="deleteCity(city, $event)">Delete</button>
+        </div>
+    </div>
+
+    <div *ngIf="!isRefreshing && cities.length === 0" class="no-cities">
+        <p>No cities saved yet. Add a city to see weather data.</p>
+    </div>
+
+    <!-- Weather Data Section -->
+    <div id="weatherData" *ngIf="showWeatherData && weatherData">
+        <h2>{{ selectedCity?.name }}</h2>
         <p>Temperature: {{ weatherData.temperature }}°C</p>
-        <p>Description: {{ weatherData.description }}</p>
-        <img [src]="weatherData.icon" alt="Weather Icon">
-        <p>Current Time: {{ currentTime }}</p>
-        <p>Current Date: {{ currentDate }}</p>
+        <p>Condition: {{ weatherData.description }}</p>
+        <p>Time: {{ currentTime }}</p>
+        <p>Date: {{ currentDate }}</p>
     </div>
 
-    <div *ngIf="weatherHistory.length > 0">
-        <h4>Weather History</h4>
-        <ul>
-            <li *ngFor="let history of weatherHistory">
-                <p>Temperature: {{ history.temperature }}°C</p>
-                <p>Description: {{ history.weatherDescription }}</p>
-                <img [src]="history.icon" alt="Weather Icon">
-                <p>Search Time: {{ history.searchTime | date: 'short' }}</p>
-            </li>
-        </ul>
+    <!-- Pagination Controls -->
+    <div class="pagination-controls" *ngIf="totalPages > 1">
+        <button (click)="changePage(1)" [disabled]="currentPage === 1">First</button>
+        <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">
+            Previous
+        </button>
+        <span>Page {{ currentPage }} of {{ totalPages }}</span>
+        <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">
+            Next
+        </button>
+        <button (click)="changePage(totalPages)" [disabled]="currentPage === totalPages">
+            Last
+        </button>
     </div>
 
-    <mat-spinner *ngIf="isRefreshing"></mat-spinner>
+    <!-- Weather History Section -->
+    <app-weather-history *ngIf="weatherHistory.length > 0" [weatherHistory]="weatherHistory"></app-weather-history>
 </div>
