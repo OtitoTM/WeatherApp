@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class TimezoneService {
-  private apiKey = 'BCU3SZ5244G4'; // Replace with your actual API key
+  private apiKey = 'BCU3SZ5244G4'; 
   private baseUrl = 'http://api.timezonedb.com/v2.1/get-time-zone';
 
   constructor(private http: HttpClient) {}
