@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { City, WeatherData } from './models/models';
 import { WeatherService } from './services/weather.service';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CityService {
-  private apiUrl = 'http://localhost:8080/api/cities';
-  private autocompleteUrl = 'http://localhost:8080/api/cities/autocomplete';
+  private apiUrl = `${environment.backendApiUrl}/cities`;
+  private autocompleteUrl = `${environment.backendApiUrl}/cities/autocomplete`;
 
   constructor(private http: HttpClient, private weatherService: WeatherService) {}
 

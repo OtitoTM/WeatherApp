@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { WeatherHistory } from './weather-history/weather-history.component';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WeatherHistoryService {
-  private apiUrl = 'http://localhost:8080/api/weatherHistory';
+  private apiUrl = `${environment.backendApiUrl}/weatherHistory`;
 
   constructor(private http: HttpClient) {}
 
