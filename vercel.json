@@ -3,6 +3,6 @@
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "buildCommand": "npm run build",
-  "outputDirectory": "dist/weather-app",
+  "outputDirectory": "dist/weather-app/browser",
   "installCommand": "npm install"
 }
