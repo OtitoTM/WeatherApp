@@ -8,7 +8,7 @@ body {
 
 /* Container */
 .container {
-    background: linear-gradient(rgba(11, 40, 119, 0.6), rgba(206, 101, 101, 0.322)), url(../../images/glass-window-1845534_640.jpg);
+    background: linear-gradient(rgba(11, 40, 119, 0.6), rgba(206, 101, 101, 0.322)), url(../../assets/images/glass-window-1845534_640.jpg);
     background-position: center;
     background-size: cover;
     width: 90%;
