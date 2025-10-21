@@ -12,7 +12,21 @@
 <body class="mat-typography">
   <app-root></app-root>
   <!-- Elfsight WhatsApp Chat | Untitled WhatsApp Chat -->
-<script src="https://elfsightcdn.com/platform.js" async></script>
-<div class="elfsight-app-23c6a66a-45dd-4d60-986d-b888cfe800ee" data-elfsight-app-lazy></div>
+   <!-- WhatsApp Floating Chat Widget -->
+<script>
+  (function () {
+    var options = {
+      whatsapp: "+254712345678", // Your WhatsApp number
+      call_to_action: "Chat with us", // The popup message text
+      position: "right", // Position of the button: 'right' or 'left'
+    };
+    var proto = document.location.protocol, host = "getbutton.io", url = proto + "//static." + host;
+    var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true;
+    s.src = url + '/widget-send-button/js/init.js';
+    s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+    var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+  })();
+</script>
+
 </body>
 </html>
